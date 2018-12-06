@@ -5,8 +5,9 @@ void Livro::incrementa(){
 }
 
 void Livro::descrementa(){
-	if(qtdeExemplares = 0)
+	if(qtdeExemplares = 0){
 	//	throw Error_qt();
+	}
 	qtdeExemplares--;
 }
 
