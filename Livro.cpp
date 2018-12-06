@@ -4,11 +4,14 @@ void Livro::incrementa(){
 	qtdeExemplares++;
 }
 
-void Livro::descrementa(){
-	if(qtdeExemplares = 0){
+void Livro::decrementa(){
+	if(qtdeExemplares == 0){
 	//	throw Error_qt();
 	}
-	qtdeExemplares--;
+	else{
+		qtdeExemplares--;
+	}
+	
 }
 
 
