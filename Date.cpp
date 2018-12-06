@@ -3,21 +3,23 @@
 #include <string>
 
 Date::Date(){
-	now = time(0);
+	date_stored = time(0);
 	char str_buffer[26];
-	std::string timestamp(ctime(&now));
-	time_string = timestamp;
 }
 
 Date::Date(time_t some_date){
-	now = some_date;
-	char str_buffer[26];
-	std::string timestamp(ctime(&now));
-	time_string = timestamp;
+	date_stored = some_date;
 }
 
 std::string Date::get_date(){
-	return time_string;
+	std::string timestamp(ctime(&date_stored));
+	return std::string timestamp(ctime(&date_stored));
 }
 
+void Date::adiciona_dias(int d){
+	struct tm * timeinfo_struct;
+	timeinfo_struct = localtime(&date_stored);   // Convert time to struct
+	timeinfo_struct->tm_mday += d;
+	date_stored = mktime (timeinfo_struct);		 // Convert struct back to time
+}
 

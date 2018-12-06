@@ -6,12 +6,13 @@
 #include <string>
 
 class Date
-{		time_t now;
+{		time_t date_stored;
 		std::string time_string;
 	public:
 		Date();
 		Date(time_t some_date);
 		std::string get_date();
+		void adiciona_dias(int d);
 };
 
 #endif
