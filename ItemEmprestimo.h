@@ -9,7 +9,7 @@ class ItemEmprestimo
 		Livro l;
 		Date dataDevolucao;
 	public:
-		ItemEmprestimo(int codPub, int a, string tit, string ed, string aut, int qt): l(codPub, a, tit, ed, aut, qt) {};
+		ItemEmprestimo(Livro livro): l(livro) {};
 };
 
 #endif
