@@ -1,4 +1,5 @@
 #include "Livro.h"
+#include <iostream>
 
 void Livro::incrementa(){
 	qtdeExemplares++;
@@ -6,7 +7,7 @@ void Livro::incrementa(){
 
 void Livro::decrementa(){
 	if(qtdeExemplares == 0){
-	//	throw Error_qt();
+		std::cout << "Nao temos esse livro " << std::endl;
 	}
 	else{
 		qtdeExemplares--;

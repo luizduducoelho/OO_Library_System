@@ -17,10 +17,10 @@ class Emprestimo
 		Date dataEmprestimo, dataPrevDevolucao;
 		vector<ItemEmprestimo> itens;
 	public:
-		Emprestimo(Usuario user, Date devolucao): numero(++proximoNumero), usuario(user), dataPrevDevolucao(devolucao) {};
-		void adiciona_livro(Livro novo_livro);
-		void exclui_livro(Livro livro_excluido);
-		void devolve_livro(Livro livro_devolvido);
+		Emprestimo(Usuario user, Date devolucao): numero(proximoNumero++), usuario(user), dataPrevDevolucao(devolucao) {};
+		void adiciona_livro(Livro &novo_livro);
+		void exclui_livro(Livro &livro_excluido);
+		void devolve_livro(Livro &livro_devolvido);
 		void devolve_todos();
 };
 

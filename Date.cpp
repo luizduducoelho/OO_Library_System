@@ -13,7 +13,7 @@ Date::Date(time_t some_date){
 
 std::string Date::get_date(){
 	std::string timestamp(ctime(&date_stored));
-	return std::string timestamp(ctime(&date_stored));
+	return timestamp;
 }
 
 void Date::adiciona_dias(int d){
