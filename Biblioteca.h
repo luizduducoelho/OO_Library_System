@@ -1,3 +1,6 @@
+#ifndef BIBLIOTECA_H
+#define BIBLIOTECA_H
+
 #include "Livro.h"
 #include "Publicacao.h"
 #include "Date.h"
@@ -8,12 +11,14 @@
 #include <string>
 #include <vector>
 
-class Usuario{
-		std::vector<Usuario> lista_usuarios;
-		std::vector<Publicacao> lista_publicacoes;
-		std::vector<Emprestimo> lista_emprestimos;
+using namespace std;
+
+class Biblioteca{
+		vector<Usuario> lista_usuarios;
+		vector<Publicacao> lista_publicacoes;
+		vector<Emprestimo> lista_emprestimos;
 	public:
-		Usuario();
+		Biblioteca();
 		void insere_usuario(Usuario user);
 		void insere_publicacao(Publicacao publi);
 		void insere_emprestimo(Emprestimo emp);
@@ -24,12 +29,14 @@ class Usuario{
 		void exclui_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp);
 		void devolve_item(Emprestimo emp, Livro livro);
 		void devolde_todos(Emprestimo emp);
-		std::vector<Publicacao> pesquisa_publicacao(std::string parte_do_titulo);
-		std::vector<Livro> pesquisa_por_autor(std::string parte_do_autor);
-		std::vector<Usuario> get_lista_usuarios();
-		std::vector<Publicacao> get_lista_publicacoes();
-		std::vector<Emprestimo> get_lista_emprestimos();
+		vector<Publicacao> pesquisa_publicacao(std::string parte_do_titulo);
+		vector<Livro> pesquisa_por_autor(std::string parte_do_autor);
+		vector<Usuario> get_lista_usuarios();
+		vector<Publicacao> get_lista_publicacoes();
+		vector<Emprestimo> get_lista_emprestimos();
 		void gravar_em_arquivo();
 		void ler_do_arquivo();
 		
 };
+
+#endif
