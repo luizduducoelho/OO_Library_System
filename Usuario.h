@@ -12,6 +12,10 @@ class Usuario
 		Date dataPenalizacao;
 	public:
 		Usuario(string n, string c, string e, string f): nome(n), cpf(c), endereco(e), fone(f) {};
+		std::string get_nome() const {return nome;}
+		std::string get_cpf() const {return cpf;}
+		std::string get_endereco() const {return endereco;}
+		std::string get_fone() const {return fone;}
 		//~Usuario();
 };
 
