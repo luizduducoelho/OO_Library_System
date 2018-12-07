@@ -34,16 +34,18 @@ void Interface::menu(){
 	bool continue_program = true;
 	while(continue_program){
 		// Exibe menu
+		system("cls");
 		std::cout << std::string(number_of_stars, '*') << std::endl;
 		for(int i=0; i < menu_messages.size(); i++){
 			std::cout << i+1 << "_ " << menu_messages[i] << std::endl;
 		}
-		std::cout << std::string(number_of_stars, '*') << std::endl << std::endl << std::endl;
+		std::cout << std::string(number_of_stars, '*') << std::endl;
 		
 		
 		// Seleciona item pelo usuario
 		int tecla;
 		std::cin >> tecla;   // TRATAR ENTRADAS INVALIDAS
+		cout << endl;
 		
 		// Chama funcao
 		switch(tecla){
@@ -67,6 +69,7 @@ void Interface::menu(){
 
 void Interface::cadastra_novo_usuario(){
 	string nome, cpf, endereco, telefone;
+	cin.ignore();
 	cout << "Cadastrando usuario" << endl;
 	cout << "Digite o nome do usuario: ";
 	std::getline(cin, nome);
@@ -92,6 +95,7 @@ void Interface::lista_usuarios(){
 		cout << "Telefone: " << lista_de_usuarios[i].get_fone() << endl;
 		cout << endl;
 	}
-	cout << "Aperte para retornar ao menu ...";
-	getc;
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.ignore();
+	cin.get() ;
 }
