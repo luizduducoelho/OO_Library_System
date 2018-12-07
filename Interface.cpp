@@ -2,12 +2,43 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 
 Interface::Interface(){
 	
 }
 
 using namespace std;
+
+/*int Interface::le_inteiro(){
+	int x;
+	cin >> x;
+	while(cin.fail()) {
+        cout << "ERRO. Digite um inteiro: " ;
+        cin.clear();
+        cin.ignore(256,'\n');
+        cin >> x;
+    }
+    return x;
+}*/
+
+int Interface::le_inteiro(){
+	int x;
+	string user_input;
+	std::getline(cin, user_input);
+	
+	while(cin.fail() || cin.eof() || user_input.find_first_not_of("0123456789") != string::npos) {
+	    std::cout << "ERRO. Digite um inteiro: ";
+	    if( user_input.find_first_not_of("0123456789") == std::string::npos) {
+	        cin.clear();
+	        cin.ignore(256,'\n');
+	    }
+	    std::getline(cin, user_input);
+    }
+    x = atoi(user_input.c_str());
+    return x;
+}
 
 void Interface::menu(){
 	int number_of_stars = 36;
@@ -44,7 +75,7 @@ void Interface::menu(){
 		
 		// Seleciona item pelo usuario
 		int tecla;
-		std::cin >> tecla;   // TRATAR ENTRADAS INVALIDAS
+		tecla = le_inteiro();
 		cout << endl;
 		
 		// Chama funcao
@@ -52,8 +83,14 @@ void Interface::menu(){
 			case 1:
 				cadastra_novo_usuario();
 				break;
+			case 2:
+				cadastra_novo_livro();
+				break;
 			case 15:
 				lista_usuarios();
+				break;
+			case 16:
+				lista_publicacoes();
 				break;
 			case 18:
 				std::cout << "Fim do programa" << std::endl;
@@ -69,7 +106,6 @@ void Interface::menu(){
 
 void Interface::cadastra_novo_usuario(){
 	string nome, cpf, endereco, telefone;
-	cin.ignore();
 	cout << "Cadastrando usuario" << endl;
 	cout << "Digite o nome do usuario: ";
 	std::getline(cin, nome);
@@ -85,6 +121,28 @@ void Interface::cadastra_novo_usuario(){
 	biblio.insere_usuario(user);
 }
 
+void Interface::cadastra_novo_livro(){
+	int codPub, ano, qt;
+	string titulo, editora, autor;
+	cout << "Cadastrando livro " << endl;
+	cout << "Codigo da publicacao: ";
+	codPub = le_inteiro();
+	cout << "Ano: ";
+	ano = le_inteiro();
+	cout << "Titulo: ";
+	std::getline(cin, titulo);
+	cout << "Editora: ";
+	getline(cin, editora);
+	cout << "Autor: ";
+	getline(cin, autor);
+	cout << "Quantidade: ";
+	qt = le_inteiro();
+	
+	Livro livro(codPub, ano, titulo, editora, autor, qt);
+	biblio.insere_publicacao(livro);
+	
+}
+
 void Interface::lista_usuarios(){
 	vector<Usuario> lista_de_usuarios;
 	lista_de_usuarios = biblio.get_lista_usuarios();
@@ -93,6 +151,21 @@ void Interface::lista_usuarios(){
 		cout << "CPF: " << lista_de_usuarios[i].get_cpf() << endl;
 		cout << "Endereco: " << lista_de_usuarios[i].get_endereco() << endl;
 		cout << "Telefone: " << lista_de_usuarios[i].get_fone() << endl;
+		cout << endl;
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.ignore();
+	cin.get() ;
+}
+
+void Interface::lista_publicacoes(){
+	vector<Publicacao> lista_de_publicacoes;
+	lista_de_publicacoes = biblio.get_lista_publicacoes();
+	for (int i=0; i < lista_de_publicacoes.size(); i++){
+		cout << "Codigo da Publicacao: " << lista_de_publicacoes[i].get_codPub() << endl;
+		cout << "Ano: " << lista_de_publicacoes[i].get_ano() << endl;
+		cout << "Titulo: " << lista_de_publicacoes[i].get_titulo() << endl;
+		cout << "Editora: " << lista_de_publicacoes[i].get_editora() << endl;
 		cout << endl;
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;

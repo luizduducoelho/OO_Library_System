@@ -11,6 +11,10 @@ class Publicacao
 		string titulo, editora;
 	public:
 		Publicacao(int codPub, int a, string tit, string ed): codPublicacao(codPub), ano(a), titulo(tit), editora(ed) {};
+		int get_codPub() const {return codPublicacao;}
+		int get_ano() const {return ano;}
+		string get_titulo() const {return titulo;}
+		string get_editora() const {return editora;}
 };
 
 #endif

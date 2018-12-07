@@ -10,6 +10,7 @@ class Interface{
 	Biblioteca biblio;
 	public:
 		Interface();
+		int le_inteiro();
 		void menu();
 		void cadastra_novo_usuario();
 		void cadastra_novo_livro();
