@@ -19,9 +19,20 @@ void Emprestimo::adiciona_itememprestimo(ItemEmprestimo item){
 }
 
 void Emprestimo::devolve_livro(Livro &livro_devolvido){
-	livro_devolvido.incrementa();
-	
-	
+	for(int i = 0; i < itens.size(); i++){
+		if(livro_devolvido.get_codPub() == itens[i].get_cod()){
+			itens[i].get_Livro().incrementa();
+			itens[i].date_sistema();
+			return;
+		}
+	}
 }
 
-//void Emprestimo::devolve_todos(){}
+void Emprestimo::devolve_todos(){
+	for(int i = 0; i < itens.size(); i++){
+		itens[i].get_Livro().incrementa();
+		itens[i].date_sistema();
+	}
+}
+
+

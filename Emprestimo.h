@@ -26,9 +26,6 @@ class Emprestimo
 		void devolve_todos();
 		int get_sizeitens() {return itens.size();}
 		
-	
-	//	std::string get_date() {dataPrevDevolucao.get_date();}
-		
 		int get_codPub(int i) {return itens[i].get_cod();}
 		
 		std::string get_cpfuser() const {return usuario.get_cpf();}
