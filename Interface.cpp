@@ -88,6 +88,7 @@ void Interface::menu(){
 				break;
 			case 3:
 				cadastra_novo_periodico();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -177,7 +178,7 @@ void Interface::lista_usuarios(){
 		cout << endl;
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
-	cin.ignore();
+	//cin.ignore();
 	cin.get() ;
 }
 
@@ -192,6 +193,5 @@ void Interface::lista_publicacoes(){
 		cout << endl;
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
-	cin.ignore();
 	cin.get() ;
 }
