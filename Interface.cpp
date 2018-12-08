@@ -146,8 +146,8 @@ void Interface::cadastra_novo_livro(){
 }
 
 void Interface::cadastra_novo_periodico(){
-	int codPub, ano, qt;
-	string titulo, editora, autor;
+	int codPub, ano, numero_edicao;
+	string titulo, editora, mes;
 	cout << "Cadastrando livro " << endl;
 	cout << "Codigo da publicacao: ";
 	codPub = le_inteiro();
@@ -157,12 +157,12 @@ void Interface::cadastra_novo_periodico(){
 	std::getline(cin, titulo);
 	cout << "Editora: ";
 	getline(cin, editora);
-	cout << "Autor: ";
-	getline(cin, autor);
-	cout << "Quantidade: ";
-	qt = le_inteiro();
+	cout << "Mes: ";
+	getline(cin, mes);
+	cout << "Numero edicao: ";
+	numero_edicao = le_inteiro();
 	
-	Periodico period(codPub, ano, titulo, editora, autor, qt);
+	Periodico period(codPub, ano, titulo, editora, numero_edicao, mes);
 	biblio.insere_publicacao(period);
 }
 

@@ -3,7 +3,7 @@
 
 #include "Publicacao.h"
 
-class Periodico
+class Periodico: public Publicacao
 {
 		int numEdicao;
 		string mes;

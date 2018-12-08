@@ -13,3 +13,7 @@ void Emprestimo::adiciona_livro(Livro &novo_livro){
 void Emprestimo::exclui_livro(Livro &livro_excluido){
 	livro_excluido.incrementa();
 }
+
+void Emprestimo::adiciona_itememprestimo(ItemEmprestimo item){
+	itens.push_back(item);
+}

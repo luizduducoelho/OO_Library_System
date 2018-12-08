@@ -3,6 +3,7 @@
 
 #include "Livro.h"
 #include "Publicacao.h"
+#include "Periodico.h"
 #include "Date.h"
 #include "Usuario.h"
 #include "Emprestimo.h"
