@@ -1,5 +1,7 @@
 #include "Biblioteca.h"
 
+int Emprestimo::proximoNumero = 0;
+
 Biblioteca::Biblioteca(){	
 }
 
