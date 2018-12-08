@@ -15,6 +15,7 @@ class Publicacao
 		int get_ano() const {return ano;}
 		string get_titulo() const {return titulo;}
 		string get_editora() const {return editora;}
+		virtual bool teste() {}; // True para LIVRO, False para PERIODICO
 };
 
 #endif

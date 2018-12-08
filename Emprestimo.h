@@ -24,6 +24,11 @@ class Emprestimo
 		void exclui_livro(Livro &livro_excluido);
 		void devolve_livro(Livro &livro_devolvido);
 		void devolve_todos();
+		int get_sizeitens() {return itens.size();}
+	
+	//	std::string get_date() {dataPrevDevolucao.get_date();}
+		
+		int get_codPub(int i) {return itens[i].get_cod();}
 		
 		std::string get_cpfuser() {return usuario.get_cpf();}
 };

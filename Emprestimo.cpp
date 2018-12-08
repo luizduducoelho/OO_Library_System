@@ -17,3 +17,10 @@ void Emprestimo::exclui_livro(Livro &livro_excluido){
 void Emprestimo::adiciona_itememprestimo(ItemEmprestimo item){
 	itens.push_back(item);
 }
+
+void Emprestimo::devolve_livro(Livro &livro_devolvido){
+	livro_devolvido.incrementa();
+	
+}
+
+//void Emprestimo::devolve_todos(){}
