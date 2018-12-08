@@ -21,6 +21,7 @@ void Emprestimo::adiciona_itememprestimo(ItemEmprestimo item){
 void Emprestimo::devolve_livro(Livro &livro_devolvido){
 	livro_devolvido.incrementa();
 	
+	
 }
 
 //void Emprestimo::devolve_todos(){}

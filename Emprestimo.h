@@ -25,6 +25,7 @@ class Emprestimo
 		void devolve_livro(Livro &livro_devolvido);
 		void devolve_todos();
 		int get_sizeitens() {return itens.size();}
+		
 	
 	//	std::string get_date() {dataPrevDevolucao.get_date();}
 		
