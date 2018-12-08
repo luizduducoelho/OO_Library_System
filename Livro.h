@@ -11,10 +11,11 @@ class Livro: public Publicacao{
 		void incrementa();
 		void decrementa();
 		int get_quantidade() const {return qtdeExemplares;}
+		string get_autores() const {return autores;}
+		int get_cod() const {return Publicacao::get_codPub();}
+		bool teste() {return true;}
 //		~Livro();
 };
 
 #endif
-
-// § Deve existir métodos para incrementar e decrementar a quantidade de exemplares de uma unidade; Não permitir o decremento se a quantidade for igual a zero.
 

@@ -12,7 +12,6 @@ void Livro::decrementa(){
 	else{
 		qtdeExemplares--;
 	}
-	
 }
 
 
