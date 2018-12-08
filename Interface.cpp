@@ -89,11 +89,17 @@ void Interface::menu(){
 			case 3:
 				cadastra_novo_periodico();
 				break;
+			case 4:
+				cadastra_novo_emprestimo();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
 			case 16:
 				lista_publicacoes();
+				break;
+			case 17:
+				lista_emprestimos();
 				break;
 			case 18:
 				std::cout << "Fim do programa" << std::endl;
@@ -167,6 +173,39 @@ void Interface::cadastra_novo_periodico(){
 	biblio.insere_publicacao(period);
 }
 
+void Interface::cadastra_novo_emprestimo(){
+	int dias_a_emprestar, indice_do_usuario;
+	string cpf;
+	vector<Usuario> lista_usuarios = biblio.get_lista_usuarios();
+	bool existe = false;
+	cout << "Cadastrando emprestimo " << endl;
+	cout << "CPF do usuario: ";
+	getline(cin, cpf);
+	for(int i=0; i<lista_usuarios.size(); i++){
+		if (lista_usuarios[i].get_cpf() == cpf){
+			cout << "Usuario " << lista_usuarios[i].get_nome() << " encontrado !" << endl;
+			indice_do_usuario = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "CPF nao existe, tente novamente!" << endl;
+	}
+	else{
+	cout << "Dias a emprestar: ";
+	dias_a_emprestar = le_inteiro();
+	Date data_devolucao;
+	data_devolucao.adiciona_dias(dias_a_emprestar);
+	
+	Emprestimo emprestimo(lista_usuarios[indice_do_usuario], data_devolucao);
+	biblio.insere_emprestimo(emprestimo);
+	cout << "Emprestimo cadastrado! " << endl;
+	cout << lista_usuarios[indice_do_usuario].get_nome() << " favor devolver ate " << data_devolucao.get_date();
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
 void Interface::lista_usuarios(){
 	vector<Usuario> lista_de_usuarios;
 	lista_de_usuarios = biblio.get_lista_usuarios();
@@ -195,3 +234,18 @@ void Interface::lista_publicacoes(){
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
+
+void Interface::lista_emprestimos(){
+	vector<Emprestimo> lista_de_emprestimos;
+	lista_de_emprestimos = biblio.get_lista_emprestimos();
+	for (int i=0; i < lista_de_emprestimos.size(); i++){
+		cout << "Emprestimo numero " << lista_de_emprestimos[i].get_numero() << endl;
+		cout << "Usuario: " << lista_de_emprestimos[i].get_nome_usuario() << endl;
+		cout << "Data de devolucao: " << lista_de_emprestimos[i].get_data_devolucao() << endl;
+		cout << endl;
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
+

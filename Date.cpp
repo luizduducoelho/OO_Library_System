@@ -11,7 +11,7 @@ Date::Date(time_t some_date){
 	date_stored = some_date;
 }
 
-std::string Date::get_date(){
+std::string Date::get_date() const {
 	std::string timestamp(ctime(&date_stored));
 	return timestamp;
 }

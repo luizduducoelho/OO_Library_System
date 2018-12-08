@@ -11,7 +11,7 @@ class Date
 	public:
 		Date();
 		Date(time_t some_date);
-		std::string get_date();
+		std::string get_date() const;
 		void adiciona_dias(int d);
 };
 
