@@ -17,7 +17,7 @@ class Emprestimo
 		Date dataEmprestimo, dataPrevDevolucao;
 		vector<ItemEmprestimo> itens;
 	public:
-		Emprestimo(Usuario user, Date devolucao): numero(proximoNumero++), usuario(user), dataPrevDevolucao(devolucao) {};
+		Emprestimo(Usuario user, Date devolucao): numero(++proximoNumero), usuario(user), dataPrevDevolucao(devolucao) {};
 		int get_numero() const {return numero;}
 		void adiciona_itememprestimo(ItemEmprestimo item);
 		void adiciona_livro(Livro &novo_livro);
