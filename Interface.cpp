@@ -86,6 +86,8 @@ void Interface::menu(){
 			case 2:
 				cadastra_novo_livro();
 				break;
+			case 3:
+				cadastra_novo_periodico();
 			case 15:
 				lista_usuarios();
 				break;
@@ -141,6 +143,27 @@ void Interface::cadastra_novo_livro(){
 	Livro livro(codPub, ano, titulo, editora, autor, qt);
 	biblio.insere_publicacao(livro);
 	
+}
+
+void Interface::cadastra_novo_periodico(){
+	int codPub, ano, qt;
+	string titulo, editora, autor;
+	cout << "Cadastrando livro " << endl;
+	cout << "Codigo da publicacao: ";
+	codPub = le_inteiro();
+	cout << "Ano: ";
+	ano = le_inteiro();
+	cout << "Titulo: ";
+	std::getline(cin, titulo);
+	cout << "Editora: ";
+	getline(cin, editora);
+	cout << "Autor: ";
+	getline(cin, autor);
+	cout << "Quantidade: ";
+	qt = le_inteiro();
+	
+	Periodico period(codPub, ano, titulo, editora, autor, qt);
+	biblio.insere_publicacao(period);
 }
 
 void Interface::lista_usuarios(){
