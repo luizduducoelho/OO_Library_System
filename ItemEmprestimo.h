@@ -13,6 +13,7 @@ class ItemEmprestimo
 		int get_cod() {return l.get_codPub();}
 		Livro get_Livro() {return l;}
 		void date_sistema();
+//		ItemEmprestimo &get_item() {return (*this);}
 };
 
 #endif

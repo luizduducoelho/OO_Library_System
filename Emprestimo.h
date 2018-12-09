@@ -24,11 +24,14 @@ class Emprestimo
 		void exclui_livro(Livro &livro_excluido);
 		void devolve_livro(Livro &livro_devolvido);
 		void devolve_todos();
-		int get_sizeitens() {return itens.size();}
+		int get_sizeitens() const {return itens.size();}
 		
 		bool operator==(Emprestimo p);
+//		ItemEmprestimo operator[](int i) {return itens[i].get_item();}
 		
 		int get_codPub(int i) {return itens[i].get_cod();}
+		
+		Usuario get_user() const {return usuario;} 
 		
 		std::string get_cpfuser() const {return usuario.get_cpf();}
 		std::string get_nome_usuario() const {return usuario.get_nome();}

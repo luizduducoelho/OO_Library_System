@@ -23,16 +23,15 @@ void Biblioteca::insere_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp)
 
 void Biblioteca::exclui_usuario(Usuario user){
 	for(int i = 0; i < lista_emprestimos.size(); i++){
-		if(lista_emprestimos[i].usuario == user)
+		if(lista_emprestimos[i].get_user() == user)
 			return; // THROW!!! Usuario com emprestimo
 	}
 	for(int j = 0; j < lista_usuarios.size(); j++){
-		if(lista_usuarios[i] == user{
+		if(lista_usuarios[j] == user){
 			lista_usuarios.erase(lista_usuarios.begin() + j);
 			return;
 		}
-	}
-	// THROW!!! Usuario nao encontrado							
+	}						
 }
 
 /*
@@ -58,19 +57,24 @@ void Biblioteca::exclui_publicacao(Publicacao publi){
 */
 
 void Biblioteca::exclui_emprestimo(Emprestimo emp){
-	for(int i = 0; i < lista_emprestimos.size(); i++){
-		if(lista_emprestimos[i].get_numero() == emp.get_numero()){
-			lista_emprestimos.erase(lista_emprestimos.begin() + i);
-			return;
-		}
-	}	
+	if(emp.get_sizeitens() != 0)
+		return; // !!! LANÇAR THROW, tem itens no empréstimo
+	else{
+		for(int i = 0; i < lista_emprestimos.size(); i++){
+			if(lista_emprestimos[i] == emp){
+				lista_emprestimos.erase(lista_emprestimos.begin() + i);
+				return;
+			}
+		}	
+	}
 }
 
+/*
 void Biblioteca::exclui_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp){
 	for(int i = 0; i < lista_emprestimos.size(); i++){
-		if(lista_emprestimos[i].get_numero() == emp.get_numero()){
+		if(lista_emprestimos[i] == emp){
 			for(int j = 0; j < lista_emprestimos[i].get_sizeitens(); j++){
-				if(item_emp.get_cod() == lista_emprestimos[i].get_codPub(j)){	
+				if(item_emp.get_Livro() == lista_emprestimos[i].get_codPub(j)){	
 					Livro l = item_emp.get_Livro();
 					lista_emprestimos[i].exclui_livro(l);
 					return;
@@ -78,25 +82,21 @@ void Biblioteca::exclui_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp)
 			}
 		}
 	}
-}
+}*/
 
+/*
 void Biblioteca::devolve_item(Emprestimo emp, Livro livro){
 	for(int i = 0; i < lista_emprestimos.size(); i++){
 		if(lista_emprestimos[i].get_numero() == emp.get_numero()){
 			for(int j = 0; j < lista_emprestimos[i].get_sizeitens(); j++){
-				if(livro.get_cod() == lista_emprestimos[i].get_codPub(j)){
+				if(livro.get_codPub() == lista_emprestimos[i].get_codPub(j)){
 					lista_emprestimos[i].devolve_livro(livro);
 				}
 			}
 		}
 	}
-}
+}*/
 		
 				
-//void Biblioteca::gravar_em_arquivo(){
-//	int i = 0;
-//	lista_emprestimos[i].get_codPub(i);
-	
-//}
-//}
+
 
