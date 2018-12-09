@@ -101,6 +101,9 @@ void Interface::menu(){
 			case 7:
 				excluir_livro();
 				break;
+			case 8:
+				excluir_periodico();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -370,6 +373,37 @@ void Interface::excluir_livro(){
 	}
 	else{
 		cout << "Erro. Publicacao nao e um livro" << endl;
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
+void Interface::excluir_periodico(){
+	int codPub, indice_do_periodico;
+	bool existe = false;
+	vector<Publicacao*> lista_publicacoes = biblio.get_lista_publicacoes();
+	cout << "Digite o codigo do periodico: ";
+	codPub = le_inteiro();
+	for(int i=0; i<lista_publicacoes.size(); i++){
+		if ((*lista_publicacoes[i]).get_codPub() == codPub){
+			cout << "Periodico " << (*lista_publicacoes[i]).get_titulo() << " encontrado !" << endl;
+			indice_do_periodico = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Periodico nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	if (dynamic_cast<Periodico*>(lista_publicacoes[indice_do_periodico])){
+		Periodico * perio_ptr = dynamic_cast<Periodico*>(lista_publicacoes[indice_do_periodico]);
+		Periodico perio_obj = *perio_ptr;
+		biblio.exclui_publicacao(perio_obj);
+	}
+	else{
+		cout << "Erro. Publicacao nao e um periodico" << endl;
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
