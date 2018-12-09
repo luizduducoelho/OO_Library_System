@@ -95,6 +95,9 @@ void Interface::menu(){
 			case 5:
 				inserir_novo_item_emprestimo();
 				break;
+			case 6:
+				excluir_usuario();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -276,6 +279,32 @@ void Interface::lista_usuarios(){
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	//cin.ignore();
+	cin.get() ;
+}
+
+void Interface::excluir_usuario(){
+	int indice_do_usuario;
+	string cpf;
+	vector<Usuario> lista_usuarios = biblio.get_lista_usuarios();
+	bool existe = false;
+	cout << "Excluindo um usuario" << endl;
+	cout << "CPF do usuario: ";
+	getline(cin, cpf);
+	for(int i=0; i<lista_usuarios.size(); i++){
+		if (lista_usuarios[i].get_cpf() == cpf){
+			cout << "Usuario " << lista_usuarios[i].get_nome() << " encontrado !" << endl;
+			indice_do_usuario = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "CPF nao existe, tente novamente!" << endl;
+	}
+	else{
+		biblio.exclui_usuario(lista_usuarios[indice_do_usuario]);
+		//cout << "Usuario " << lista_usuarios[indice_do_usuario].get_nome() << " excluido com sucesso" << endl;
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
 
