@@ -9,6 +9,20 @@ void Biblioteca::insere_usuario(Usuario user){
 	lista_usuarios.push_back(user);
 }
 
+void Biblioteca::insere_publicacao(Publicacao &publi){
+	std::cout << "Inserindo" << std::endl;
+	std::cout << "Titulo " << publi.get_titulo() << std::endl;
+	//lista_publicacoes.push_back(&publi);
+	if(dynamic_cast<Livro*>(&publi)){
+		Livro* new_pointer = dynamic_cast<Livro*>(&publi);
+		lista_publicacoes.push_back(new Livro(new_pointer->get_codPub(), new_pointer->get_ano(), new_pointer->get_titulo(), new_pointer->get_editora(),new_pointer->get_autores(), new_pointer->get_quantidade()));
+		//lista_publicacoes.push_back(new Livro(dynamic_cast<Livro*>(&publi));
+	}
+	else{
+		std::cout << "Nao eh livro" << std::endl;
+	}
+}
+
 void Biblioteca::insere_emprestimo(Emprestimo emp){
 	lista_emprestimos.push_back(emp);
 }
@@ -96,7 +110,22 @@ void Biblioteca::devolve_item(Emprestimo emp, Livro livro){
 		}
 	}
 }*/
-		
+
+void Biblioteca::imprime_publicacoes(){
+	for (int i=0; i < lista_publicacoes.size(); i++){
+		std::cout << "Iteration " << i << std::endl;
+		std::cout << "Codigo da Publicacao: " << lista_publicacoes[i]->get_codPub() << std::endl;
+		std::cout << "Ano: " << lista_publicacoes[i]->get_ano() << std::endl;
+		std::cout << "Titulo: " << lista_publicacoes[i]->get_titulo() << std::endl;
+		std::cout << "Editora: " << lista_publicacoes[i]->get_editora() << std::endl;
+		if(dynamic_cast<Livro*>(lista_publicacoes[i])){
+			Livro* new_pointer = dynamic_cast<Livro*>(lista_publicacoes[i]);
+			std::cout << "Autores: " << new_pointer->get_autores() << std::endl;
+			std::cout << "Quantidade :" << new_pointer->get_quantidade() << std::endl;
+		}
+		std::cout << std::endl;
+	}
+}
 				
 
 
