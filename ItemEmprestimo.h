@@ -10,8 +10,9 @@ class ItemEmprestimo
 		Date dataDevolucao;
 	public:
 		ItemEmprestimo(Livro livro): l(livro) {};
-		int get_cod() {return l.get_codPub();}
-		Livro get_Livro() {return l;}
+		int get_cod() const {return l.get_codPub();}
+		string get_titulo() const {return l.get_titulo();}
+		Livro get_Livro() const {return l;}
 		void date_sistema();
 //		ItemEmprestimo &get_item() {return (*this);}
 };

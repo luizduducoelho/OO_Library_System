@@ -25,4 +25,3 @@ int Livro::compare_autores(string aut){
 	return autores.compare(aut);
 }
 
-

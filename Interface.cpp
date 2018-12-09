@@ -92,6 +92,9 @@ void Interface::menu(){
 			case 4:
 				cadastra_novo_emprestimo();
 				break;
+			case 5:
+				//inserir_novo_item_emprestimo();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -150,6 +153,9 @@ void Interface::cadastra_novo_livro(){
 	Livro livro(codPub, ano, titulo, editora, autor, qt);
 	biblio.insere_publicacao(livro);
 	
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+	
 }
 
 void Interface::cadastra_novo_periodico(){
@@ -206,6 +212,57 @@ void Interface::cadastra_novo_emprestimo(){
 	cin.get() ;
 }
 
+/*void Interface::inserir_novo_item_emprestimo(){
+	vector<Emprestimo> lista_emprestimos = biblio.get_lista_emprestimos();
+	vector<Publicacao*> lista_publicacoes = biblio.get_lista_publicacoes();
+	int numero, indice_do_emprestimo, indice_do_livro, codPub;
+	cout << "Inserindo item de emprestimo " << endl;
+	cout << "Numero do emprestimo: ";
+	numero = le_inteiro();
+	bool existe;
+	for(int i=0; i<lista_emprestimos.size(); i++){
+		if (lista_emprestimos[i].get_numero() == numero){
+			cout << "Emprestimo " << lista_emprestimos[i].get_numero() << " encontrado !" << endl;
+			indice_do_emprestimo = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Emprestimo nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	cout << "Digite o codigo do livro: ";
+	codPub = le_inteiro();
+	existe = false;
+	for(int i=0; i<lista_publicacoes.size(); i++){
+		if ((*lista_publicacoes[i]).get_codPub() == codPub){
+			cout << "Livro " << (*lista_publicacoes[i]).get_titulo() << " encontrado !" << endl;
+			indice_do_livro = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Livro nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	/*Livro * livro = dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro]);
+	if(livro == NULL)
+    {
+        cout<<"Falhou!" << endl;
+        return;
+    }
+	ItemEmprestimo item(*livro);
+	lista_emprestimos[indice_do_emprestimo].adiciona_itememprestimo(item);
+	cout << "Item inserido! " << endl;
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;*/
+	
+//}
+
 void Interface::lista_usuarios(){
 	vector<Usuario> lista_de_usuarios;
 	lista_de_usuarios = biblio.get_lista_usuarios();
@@ -222,15 +279,16 @@ void Interface::lista_usuarios(){
 }
 
 void Interface::lista_publicacoes(){
-	vector<Publicacao> lista_de_publicacoes;
-	lista_de_publicacoes = biblio.get_lista_publicacoes();
-	for (int i=0; i < lista_de_publicacoes.size(); i++){
-		cout << "Codigo da Publicacao: " << lista_de_publicacoes[i].get_codPub() << endl;
-		cout << "Ano: " << lista_de_publicacoes[i].get_ano() << endl;
-		cout << "Titulo: " << lista_de_publicacoes[i].get_titulo() << endl;
-		cout << "Editora: " << lista_de_publicacoes[i].get_editora() << endl;
+	/*cout << "Temos " << biblio.get_publicacoes_size() << " Publicacoes" << endl;
+	for (int i=0; i < biblio.get_publicacoes_size(); i++){
+		cout << "Iteration " << i << endl;
+		cout << "Codigo da Publicacao: " << biblio.get_codPub(i) << endl;
+		cout << "Ano: " << biblio.get_ano(i) << endl;
+		cout << "Titulo: " << biblio.get_titulo(i) << endl;
+		cout << "Editora: " << biblio.get_editora(i) << endl;
 		cout << endl;
-	}
+	}*/
+	biblio.imprime_publicacoes();
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
@@ -241,6 +299,10 @@ void Interface::lista_emprestimos(){
 	for (int i=0; i < lista_de_emprestimos.size(); i++){
 		cout << "Emprestimo numero " << lista_de_emprestimos[i].get_numero() << endl;
 		cout << "Usuario: " << lista_de_emprestimos[i].get_nome_usuario() << endl;
+		vector<ItemEmprestimo> itens = lista_de_emprestimos[i].get_itens();
+		for (int j=0; j < itens.size(); j++){
+			cout << "Item " << itens[j].get_titulo() << endl;
+		}
 		cout << "Data de devolucao: " << lista_de_emprestimos[i].get_data_devolucao() << endl;
 		cout << endl;
 	}
