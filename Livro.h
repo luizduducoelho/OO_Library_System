@@ -8,7 +8,7 @@ class Livro: public Publicacao{
 		string autores;
 	public:
 		Livro(int codPub, int a, string tit, string ed, string aut, int qt = 0): Publicacao(codPub, a, tit, ed), autores(aut), qtdeExemplares(qt) {};
-		Livro(const Livro &l): Publicacao(l.codPublicacao, l.ano, l.titulo, l.editora), autores(l.autores), qtdeExemplares(l.qtdeExemplares) {};
+		//Livro(const Livro &l): Publicacao(l.codPublicacao, l.ano, l.titulo, l.editora), autores(l.autores), qtdeExemplares(l.qtdeExemplares) {};
 		void incrementa();
 		void decrementa();
 		

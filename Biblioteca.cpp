@@ -10,7 +10,6 @@ void Biblioteca::insere_usuario(Usuario user){
 }
 
 void Biblioteca::insere_publicacao(Publicacao &publi){
-	std::cout << "Inserindo" << std::endl;
 	//lista_publicacoes.push_back(&publi);
 	if(dynamic_cast<Livro*>(&publi)){
 		Livro* new_pointer = dynamic_cast<Livro*>(&publi);

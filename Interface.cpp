@@ -93,7 +93,10 @@ void Interface::menu(){
 				cadastra_novo_emprestimo();
 				break;
 			case 5:
-				//inserir_novo_item_emprestimo();
+				inserir_novo_item_emprestimo();
+				break;
+			case 6:
+				excluir_usuario();
 				break;
 			case 15:
 				lista_usuarios();
@@ -212,7 +215,7 @@ void Interface::cadastra_novo_emprestimo(){
 	cin.get() ;
 }
 
-/*void Interface::inserir_novo_item_emprestimo(){
+void Interface::inserir_novo_item_emprestimo(){
 	vector<Emprestimo> lista_emprestimos = biblio.get_lista_emprestimos();
 	vector<Publicacao*> lista_publicacoes = biblio.get_lista_publicacoes();
 	int numero, indice_do_emprestimo, indice_do_livro, codPub;
@@ -249,19 +252,20 @@ void Interface::cadastra_novo_emprestimo(){
 		cin.get();
 		return;
 	}
-	/*Livro * livro = dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro]);
-	if(livro == NULL)
-    {
-        cout<<"Falhou!" << endl;
-        return;
-    }
-	ItemEmprestimo item(*livro);
-	lista_emprestimos[indice_do_emprestimo].adiciona_itememprestimo(item);
-	cout << "Item inserido! " << endl;
+	if (dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro])){
+		Livro * livro = dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro]);
+		Livro livro_obj = *livro;
+		ItemEmprestimo item(livro_obj);
+		biblio.insere_item_emprestimo(lista_emprestimos[indice_do_emprestimo], item);
+		cout << "Item " << livro_obj.get_titulo() << " inserido! " << endl;
+	}
+	else{
+		cout << "Erro ao indexar livro" << endl;
+	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
-	cin.get() ;*/
+	cin.get() ;
 	
-//}
+}
 
 void Interface::lista_usuarios(){
 	vector<Usuario> lista_de_usuarios;
@@ -275,6 +279,32 @@ void Interface::lista_usuarios(){
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	//cin.ignore();
+	cin.get() ;
+}
+
+void Interface::excluir_usuario(){
+	int indice_do_usuario;
+	string cpf;
+	vector<Usuario> lista_usuarios = biblio.get_lista_usuarios();
+	bool existe = false;
+	cout << "Excluindo um usuario" << endl;
+	cout << "CPF do usuario: ";
+	getline(cin, cpf);
+	for(int i=0; i<lista_usuarios.size(); i++){
+		if (lista_usuarios[i].get_cpf() == cpf){
+			cout << "Usuario " << lista_usuarios[i].get_nome() << " encontrado !" << endl;
+			indice_do_usuario = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "CPF nao existe, tente novamente!" << endl;
+	}
+	else{
+		biblio.exclui_usuario(lista_usuarios[indice_do_usuario]);
+		//cout << "Usuario " << lista_usuarios[indice_do_usuario].get_nome() << " excluido com sucesso" << endl;
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
 
@@ -299,9 +329,10 @@ void Interface::lista_emprestimos(){
 	for (int i=0; i < lista_de_emprestimos.size(); i++){
 		cout << "Emprestimo numero " << lista_de_emprestimos[i].get_numero() << endl;
 		cout << "Usuario: " << lista_de_emprestimos[i].get_nome_usuario() << endl;
-		vector<ItemEmprestimo> itens = lista_de_emprestimos[i].get_itens();
-		for (int j=0; j < itens.size(); j++){
-			cout << "Item " << itens[j].get_titulo() << endl;
+		vector<ItemEmprestimo> vetor_de_itens = lista_de_emprestimos[i].get_itens();
+		cout << "Emprestimo tem " << vetor_de_itens.size() << " livros" << endl;
+		for (int j=0; j < vetor_de_itens.size(); j++){
+			cout << "Item " << vetor_de_itens[j].get_titulo() << endl;
 		}
 		cout << "Data de devolucao: " << lista_de_emprestimos[i].get_data_devolucao() << endl;
 		cout << endl;
