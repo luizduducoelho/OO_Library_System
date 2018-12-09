@@ -11,15 +11,18 @@ void Biblioteca::insere_usuario(Usuario user){
 
 void Biblioteca::insere_publicacao(Publicacao &publi){
 	std::cout << "Inserindo" << std::endl;
-	std::cout << "Titulo " << publi.get_titulo() << std::endl;
 	//lista_publicacoes.push_back(&publi);
 	if(dynamic_cast<Livro*>(&publi)){
 		Livro* new_pointer = dynamic_cast<Livro*>(&publi);
 		lista_publicacoes.push_back(new Livro(new_pointer->get_codPub(), new_pointer->get_ano(), new_pointer->get_titulo(), new_pointer->get_editora(),new_pointer->get_autores(), new_pointer->get_quantidade()));
 		//lista_publicacoes.push_back(new Livro(dynamic_cast<Livro*>(&publi));
 	}
+	else if(dynamic_cast<Periodico*>(&publi)){
+		Periodico* new_pointer = dynamic_cast<Periodico*>(&publi);
+		lista_publicacoes.push_back(new Periodico(new_pointer->get_codPub(), new_pointer->get_ano(), new_pointer->get_titulo(), new_pointer->get_editora(), new_pointer->get_numEdicao(), new_pointer->get_mes()));
+	}
 	else{
-		std::cout << "Nao eh livro" << std::endl;
+		std::cout << "Erro. Tipo desonhecido" << endl;
 	}
 }
 
@@ -121,7 +124,12 @@ void Biblioteca::imprime_publicacoes(){
 		if(dynamic_cast<Livro*>(lista_publicacoes[i])){
 			Livro* new_pointer = dynamic_cast<Livro*>(lista_publicacoes[i]);
 			std::cout << "Autores: " << new_pointer->get_autores() << std::endl;
-			std::cout << "Quantidade :" << new_pointer->get_quantidade() << std::endl;
+			std::cout << "Quantidade: " << new_pointer->get_quantidade() << std::endl;
+		}
+		else if(dynamic_cast<Periodico*>(lista_publicacoes[i])){
+			Periodico* new_pointer = dynamic_cast<Periodico*>(lista_publicacoes[i]);
+			std::cout << "Numero edicao: " << new_pointer->get_numEdicao() << std::endl;
+			std::cout << "Mes: " << new_pointer->get_mes() << std::endl;
 		}
 		std::cout << std::endl;
 	}
@@ -130,15 +138,15 @@ void Biblioteca::imprime_publicacoes(){
 vector<Publicacao> Biblioteca::pesquisa_publicacao(std::string parte_do_titulo){
 	vector<Publicacao> p_aux;
 	for(int i = 0; i < lista_publicacoes.size(); i++){
-		if(lista_publicacoes[i].compare_titulo(parte_do_titulo) > 4)
-			p_aux.push_back(lista_publicacoes[i]);
+		if(lista_publicacoes[i]->compare_titulo(parte_do_titulo) > 4)
+			p_aux.push_back(*lista_publicacoes[i]);
 	}
 	return p_aux;
 }
  vector<Livro> Biblioteca::pesquisa_por_autor(std::string parte_do_autor){
 	vector<Livro> l_aux;
 	for(int i = 0; i < lista_publicacoes.size(); i++){
-		if((lista_publicacoes[i].compare_autores(parte_do_autor) > 3) && (lista_publicacoes[i].teste())){
+		if((lista_publicacoes[i]->compare_autores(parte_do_autor) > 3) && (lista_publicacoes[i]->teste())){
 			Livro &l = (Livro&)lista_publicacoes[i];
 			l_aux.push_back(l);
 		}
