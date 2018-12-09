@@ -98,6 +98,9 @@ void Interface::menu(){
 			case 6:
 				excluir_usuario();
 				break;
+			case 7:
+				excluir_livro();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -341,4 +344,34 @@ void Interface::lista_emprestimos(){
 	cin.get() ;
 }
 
+void Interface::excluir_livro(){
+	int codPub, indice_do_livro;
+	bool existe = false;
+	vector<Publicacao*> lista_publicacoes = biblio.get_lista_publicacoes();
+	cout << "Digite o codigo do livro: ";
+	codPub = le_inteiro();
+	for(int i=0; i<lista_publicacoes.size(); i++){
+		if ((*lista_publicacoes[i]).get_codPub() == codPub){
+			cout << "Livro " << (*lista_publicacoes[i]).get_titulo() << " encontrado !" << endl;
+			indice_do_livro = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Livro nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	if (dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro])){
+		Livro * livro = dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro]);
+		Livro livro_obj = *livro;
+		biblio.exclui_publicacao(livro_obj);
+	}
+	else{
+		cout << "Erro. Publicacao nao e um livro" << endl;
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
 

@@ -26,7 +26,7 @@ class Biblioteca{
 		void insere_emprestimo(Emprestimo emp);
 		void insere_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp);
 		void exclui_usuario(Usuario user);
-		void exclui_publicacao(Publicacao publi);
+		void exclui_publicacao(Publicacao &publi);
 		void exclui_emprestimo(Emprestimo emp);
 		void exclui_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp);
 		void devolve_item(Emprestimo emp, Livro livro);
