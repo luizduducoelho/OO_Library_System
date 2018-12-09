@@ -18,6 +18,8 @@ class Livro: public Publicacao{
 		bool teste() {return true;}
 		bool operator==(Livro l);
 //		~Livro();
+		int compare_autores(string aut);
+		
 };
 
 #endif
