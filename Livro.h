@@ -15,7 +15,6 @@ class Livro: public Publicacao{
 		int get_quantidade() const {return qtdeExemplares;}
 		string get_autores() const {return autores;}
 		
-		bool teste() {return true;}
 		bool operator==(Livro l);
 		int compare_autores(string aut);
 		

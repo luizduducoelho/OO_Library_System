@@ -52,10 +52,6 @@ void Biblioteca::exclui_usuario(Usuario user){
 
 
 void Biblioteca::exclui_publicacao(Publicacao &publi){
-	if(publi.teste()){
-		
-		
-	}
 	for(int i = 0; i < lista_publicacoes.size(); i++){
 		if(lista_publicacoes[i]->get_codPub() == publi.get_codPub()){
 			if (dynamic_cast<Livro*>(lista_publicacoes[i])){  // Se eh livro
@@ -143,11 +139,12 @@ vector<Publicacao> Biblioteca::pesquisa_publicacao(std::string parte_do_titulo){
 	}
 	return p_aux;
 }
- vector<Livro> Biblioteca::pesquisa_por_autor(std::string parte_do_autor){
+
+vector<Livro> Biblioteca::pesquisa_por_autor(std::string parte_do_autor){
 	vector<Livro> l_aux;
 	for(int i = 0; i < lista_publicacoes.size(); i++){
-		if((lista_publicacoes[i]->compare_autores(parte_do_autor) > 3) && (lista_publicacoes[i]->teste())){
-			Livro &l = (Livro&)lista_publicacoes[i];
+		if((lista_publicacoes[i]->compare_autores(parte_do_autor) > 3) && (dynamic_cast<Livro*>(&(*lista_publicacoes[i])))){
+			Livro &l = (Livro&)(*lista_publicacoes[i]);
 			l_aux.push_back(l);
 		}
 	}

@@ -9,8 +9,7 @@ class Periodico: public Publicacao
 		string mes;
 	public:
 		Periodico(int codPub, int a, string tit, string ed, int numEd, string m): Publicacao(codPub, a, tit, ed), numEdicao(numEd), mes(m) {};
-		bool teste() {return false;}
-		int compare_autores(string aut) {return -10;}
+		int compare_autores(string aut) {};
 		int get_numEdicao() const {return numEdicao;}
 		string get_mes() const {return mes;}
 	};
