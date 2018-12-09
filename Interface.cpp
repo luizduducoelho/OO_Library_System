@@ -161,7 +161,7 @@ void Interface::cadastra_novo_livro(){
 void Interface::cadastra_novo_periodico(){
 	int codPub, ano, numero_edicao;
 	string titulo, editora, mes;
-	cout << "Cadastrando livro " << endl;
+	cout << "Cadastrando periodico " << endl;
 	cout << "Codigo da publicacao: ";
 	codPub = le_inteiro();
 	cout << "Ano: ";

@@ -7,3 +7,6 @@ bool Publicacao::operator==(Publicacao p){
 		return false;	
 }
 
+int Publicacao::compare_titulo(string tit){
+	return titulo.compare(tit);
+}
