@@ -14,6 +14,7 @@ class Date
 		std::string get_date() const;
 		void adiciona_dias(int d);
 		void set_date(std::string time){std::string time_string = time;}
+		bool operator==(Date d);
 };
 
 #endif

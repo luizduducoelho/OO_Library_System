@@ -23,3 +23,9 @@ void Date::adiciona_dias(int d){
 	date_stored = mktime (timeinfo_struct);		 // Convert struct back to time
 }
 
+bool Date::operator==(Date t){
+	if(time_string == t.time_string)
+		return true;
+	else
+		return false;
+}

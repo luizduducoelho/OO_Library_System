@@ -16,6 +16,7 @@ class Usuario
 		std::string get_cpf() const {return cpf;}
 		std::string get_endereco() const {return endereco;}
 		std::string get_fone() const {return fone;}
+		bool operator==(Usuario user);
 		//~Usuario();
 };
 

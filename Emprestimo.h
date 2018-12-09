@@ -26,6 +26,8 @@ class Emprestimo
 		void devolve_todos();
 		int get_sizeitens() {return itens.size();}
 		
+		bool operator==(Emprestimo p);
+		
 		int get_codPub(int i) {return itens[i].get_cod();}
 		
 		std::string get_cpfuser() const {return usuario.get_cpf();}

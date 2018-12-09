@@ -35,4 +35,24 @@ void Emprestimo::devolve_todos(){
 	}
 }
 
+bool Emprestimo::operator==(Emprestimo e){
+	if(numero == e.numero && usuario == e.usuario && dataEmprestimo == e.dataEmprestimo)
+		return true;
+	else
+		return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

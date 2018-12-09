@@ -14,6 +14,7 @@ class Livro: public Publicacao{
 		string get_autores() const {return autores;}
 		int get_cod() const {return Publicacao::get_codPub();}
 		bool teste() {return true;}
+//		bool operator==(Livro l);
 //		~Livro();
 };
 

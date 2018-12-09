@@ -22,20 +22,25 @@ void Biblioteca::insere_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp)
 }
 
 void Biblioteca::exclui_usuario(Usuario user){
-	for(int i = 0; i < lista_usuarios.size(); i++){
-		if(lista_usuarios[i].get_cpf() == user.get_cpf()){
-			for(int j = 0; j < lista_emprestimos.size(); j++){
-				if(lista_usuarios[i].get_cpf() == lista_emprestimos[j].get_cpfuser()){
-					return;
-				}
-			}
-			lista_usuarios.erase(lista_usuarios.begin() + i);
+	for(int i = 0; i < lista_emprestimos.size(); i++){
+		if(lista_emprestimos[i].usuario == user)
+			return; // THROW!!! Usuario com emprestimo
+	}
+	for(int j = 0; j < lista_usuarios.size(); j++){
+		if(lista_usuarios[i] == user{
+			lista_usuarios.erase(lista_usuarios.begin() + j);
 			return;
 		}
-	}	
+	}
+	// THROW!!! Usuario nao encontrado							
 }
 
-/*void Biblioteca::exclui_publicacao(Publicacao publi){
+/*
+void Biblioteca::exclui_publicacao(Publicacao publi){
+	if(publi.teste()){
+		
+		
+	}
 	for(int i = 0; i < lista_publicacoes.size(); i++){
 		if(lista_publicacoes[i].get_codPub() == publi.get_codPub()){
 				if(lista_publicacoes[i].teste() == true){
@@ -49,7 +54,8 @@ void Biblioteca::exclui_usuario(Usuario user){
 			return;
 		}
 	}	
-}*/
+}
+*/
 
 void Biblioteca::exclui_emprestimo(Emprestimo emp){
 	for(int i = 0; i < lista_emprestimos.size(); i++){
