@@ -17,6 +17,8 @@ class Publicacao
 		string get_editora() const {return editora;}
 		virtual bool teste() {}; // True para LIVRO, False para PERIODICO
 		bool operator==(Publicacao p);
+		int compare_titulo(string tit);
+		virtual int compare_autores(string aut) {};
 };
 
 #endif
