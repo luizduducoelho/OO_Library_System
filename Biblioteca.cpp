@@ -50,27 +50,29 @@ void Biblioteca::exclui_usuario(Usuario user){
 	}						
 }
 
-/*
-void Biblioteca::exclui_publicacao(Publicacao publi){
+
+void Biblioteca::exclui_publicacao(Publicacao &publi){
 	if(publi.teste()){
 		
 		
 	}
 	for(int i = 0; i < lista_publicacoes.size(); i++){
-		if(lista_publicacoes[i].get_codPub() == publi.get_codPub()){
-				if(lista_publicacoes[i].teste() == true){
-					for(int j = 0; j < lista_emprestimos.size(); j++){
-					//	for(int k = 0; k < lista_emprestimos[j].get_sizeitens(); k++){
-							//lista_emprestimos[j];
-					//	}
+		if(lista_publicacoes[i]->get_codPub() == publi.get_codPub()){
+			if (dynamic_cast<Livro*>(lista_publicacoes[i])){  // Se eh livro
+				for(int j = 0; j < lista_emprestimos.size(); j++){
+					vector<ItemEmprestimo> itens = lista_emprestimos[j].get_itens();
+					for(int k = 0; k < lista_emprestimos[j].get_sizeitens(); k++){
+						if (itens[k].get_cod() == publi.get_codPub()){
+							return;
+						}
 					}
 				}
+			}
 			lista_publicacoes.erase(lista_publicacoes.begin() + i);
 			return;
 		}
 	}	
 }
-*/
 
 void Biblioteca::exclui_emprestimo(Emprestimo emp){
 	if(emp.get_sizeitens() != 0)
@@ -115,7 +117,6 @@ void Biblioteca::devolve_item(Emprestimo emp, Livro livro){
 
 void Biblioteca::imprime_publicacoes(){
 	for (int i=0; i < lista_publicacoes.size(); i++){
-		std::cout << "Iteration " << i << std::endl;
 		std::cout << "Codigo da Publicacao: " << lista_publicacoes[i]->get_codPub() << std::endl;
 		std::cout << "Ano: " << lista_publicacoes[i]->get_ano() << std::endl;
 		std::cout << "Titulo: " << lista_publicacoes[i]->get_titulo() << std::endl;
