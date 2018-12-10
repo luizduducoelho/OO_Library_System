@@ -17,8 +17,8 @@ class Publicacao
 		virtual string get_titulo() const {return titulo;}
 		virtual string get_editora() const {return editora;}
 		virtual bool operator==(Publicacao p);
-		int compare_titulo(string tit);
-		virtual int compare_autores(string aut) {};
+		int compare_titulo(size_t pos, size_t len, string tit);
+		virtual int compare_autores(size_t pos, size_t len, string aut);
 };
 
 #endif

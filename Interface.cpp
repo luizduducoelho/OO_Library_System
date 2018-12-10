@@ -523,7 +523,7 @@ void Interface::pesquisa_livro_por_autor(){
 }
 
 void Interface::lista_publicacoes(){
-	vector<Publicacoes*> lista_publicacoes = biblio.get_lista_publicacoes();
+	vector<Publicacao*> lista_publicacoes = biblio.get_lista_publicacoes();
 	for (int i=0; i < lista_publicacoes.size(); i++){
 		std::cout << "Codigo da Publicacao: " << lista_publicacoes[i]->get_codPub() << std::endl;
 		std::cout << "Ano: " << lista_publicacoes[i]->get_ano() << std::endl;

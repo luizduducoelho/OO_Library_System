@@ -141,20 +141,36 @@ void Biblioteca::imprime_publicacoes(){
 
 vector<Publicacao*> Biblioteca::pesquisa_publicacao(std::string parte_do_titulo){
 	vector<Publicacao*> p_aux;
+	size_t found;
 	for(int i = 0; i < lista_publicacoes.size(); i++){
-		if(lista_publicacoes[i]->compare_titulo(parte_do_titulo) > 4)
-			p_aux.push_back(lista_publicacoes[i]);
+		found = lista_publicacoes[i]->get_titulo().find(parte_do_titulo);
+		//cout << found << endl;
+		if (found != string::npos){
+			//cout << lista_publicacoes[i]->compare_titulo(found, parte_do_titulo.length(), parte_do_titulo) << endl;
+			if(lista_publicacoes[i]->compare_titulo(found, parte_do_titulo.length(), parte_do_titulo) == 0)
+				p_aux.push_back(lista_publicacoes[i]);
+		}
 	}
 	return p_aux;
 }
 
 vector<Livro> Biblioteca::pesquisa_por_autor(std::string parte_do_autor){
 	vector<Livro> l_aux;
+	size_t found;
 	for(int i = 0; i < lista_publicacoes.size(); i++){
-		if((lista_publicacoes[i]->compare_autores(parte_do_autor) > 3) && (dynamic_cast<Livro*>(&(*lista_publicacoes[i])))){
-			Livro &l = (Livro&)(*lista_publicacoes[i]);
-			l_aux.push_back(l);
+		if (dynamic_cast<Livro*>(&(*lista_publicacoes[i]))){
+			Livro* livro = dynamic_cast<Livro*>(&(*lista_publicacoes[i]));
+			found = livro->get_autores().find(parte_do_autor);
+			//cout << found << endl;
+			if (found != string::npos){
+				//cout << lista_publicacoes[i]->compare_autores(found, parte_do_autor.length(), parte_do_autor) << endl;
+				if(lista_publicacoes[i]->compare_autores(found, parte_do_autor.length(), parte_do_autor) == 0 || lista_publicacoes[i]->compare_autores(found, parte_do_autor.length(), parte_do_autor) > 3){
+				Livro &l = (Livro&)(*lista_publicacoes[i]);
+				l_aux.push_back(l);
+				}
+			}
 		}
+	
 	}
 	return l_aux;
 }				
