@@ -40,6 +40,23 @@ bool Date::operator==(Date t){
 
 void Date::calcula_data_penalizacao(Date data_prevista){
 	double seconds;
+	int dias_de_penalizacao;
 	seconds = difftime(date_stored, data_prevista.date_stored);
-	
+	if (seconds > 0){
+		dias_de_penalizacao = seconds/86400;
+		adiciona_dias(dias_de_penalizacao*3);
+	}
+}
+
+bool Date::verifica_penalizacao(){
+	time_t now = time(0);
+	double seconds;
+	seconds = difftime(date_stored, now);
+	if (seconds > 0){
+		// Esta penalizado
+		return false;
+	}
+	else{
+		return true;
+	}
 }

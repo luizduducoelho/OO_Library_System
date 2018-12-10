@@ -15,8 +15,14 @@ void Emprestimo::exclui_livro(Livro &livro_excluido){
 }
 
 void Emprestimo::adiciona_itememprestimo(ItemEmprestimo item){
-	item.get_Livro().decrementa();
-	itens.push_back(item);
+	if (usuario.verifica_penalizacao()){
+		item.get_Livro().decrementa();
+		itens.push_back(item);
+	}
+	else{
+		// THROWWWWW
+		return;
+	}
 }
 
 void Emprestimo::devolve_livro(Livro &livro_devolvido){
@@ -24,16 +30,17 @@ void Emprestimo::devolve_livro(Livro &livro_devolvido){
 		if(livro_devolvido.get_codPub() == itens[i].get_cod()){
 			itens[i].get_Livro().incrementa();
 			itens[i].date_sistema();
+			usuario.recebe_penalizacao(dataPrevDevolucao);
 			return;
 		}
 	}
-	
 }
 
 void Emprestimo::devolve_todos(){
 	for(int i = 0; i < itens.size(); i++){
 		itens[i].get_Livro().incrementa();
 		itens[i].date_sistema();
+		usuario.recebe_penalizacao(dataPrevDevolucao);
 	}
 }
 

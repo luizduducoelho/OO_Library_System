@@ -17,6 +17,7 @@ class Date
 		void reset_date();
 		bool operator==(Date d);
 		void calcula_data_penalizacao(Date data_prevista);
+		bool verifica_penalizacao();
 };
 
 #endif

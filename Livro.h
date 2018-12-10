@@ -16,7 +16,7 @@ class Livro: public Publicacao{
 		string get_autores() const {return autores;}
 		
 		bool operator==(Livro l);
-		int compare_autores(string aut);
+		int compare_autores(size_t pos, size_t len, string aut);
 		
 };
 

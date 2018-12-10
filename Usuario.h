@@ -17,6 +17,8 @@ class Usuario
 		std::string get_endereco() const {return endereco;}
 		std::string get_fone() const {return fone;}
 		bool operator==(Usuario user);
+		void recebe_penalizacao(Date data_prevista) {dataPenalizacao.calcula_data_penalizacao(data_prevista);}
+		bool verifica_penalizacao() {return dataPenalizacao.verifica_penalizacao();}
 		//~Usuario();
 };
 
