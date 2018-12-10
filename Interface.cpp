@@ -107,6 +107,9 @@ void Interface::menu(){
 			case 9:
 				excluir_emprestimo();
 				break;
+			case 10:
+				excluir_item_emprestimo();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -337,6 +340,52 @@ void Interface::excluir_emprestimo(){
 		return;
 	}
 	biblio.exclui_emprestimo(lista_emprestimos[indice_do_emprestimo]);
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
+void Interface::excluir_item_emprestimo(){
+	vector<Emprestimo> lista_emprestimos = biblio.get_lista_emprestimos();
+	vector<Publicacao*> lista_publicacoes = biblio.get_lista_publicacoes();
+	int numero, indice_do_emprestimo, indice_do_livro, codPub;
+	cout << "Inserindo item de emprestimo " << endl;
+	cout << "Numero do emprestimo: ";
+	numero = le_inteiro();
+	bool existe;
+	for(int i=0; i<lista_emprestimos.size(); i++){
+		if (lista_emprestimos[i].get_numero() == numero){
+			cout << "Emprestimo " << lista_emprestimos[i].get_numero() << " encontrado !" << endl;
+			indice_do_emprestimo = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Emprestimo nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	cout << "Digite o codigo do livro: ";
+	codPub = le_inteiro();
+	existe = false;
+	for(int i=0; i<lista_publicacoes.size(); i++){
+		if ((*lista_publicacoes[i]).get_codPub() == codPub){
+			cout << "Livro " << (*lista_publicacoes[i]).get_titulo() << " encontrado !" << endl;
+			indice_do_livro = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Livro nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	Livro * livro = dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro]);
+	Livro livro_obj = *livro;
+	ItemEmprestimo item(livro_obj);
+	biblio.exclui_item_emprestimo(lista_emprestimos[indice_do_emprestimo], item);
+	cout << "Item " << livro_obj.get_titulo() << " excluido! " << endl;
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
