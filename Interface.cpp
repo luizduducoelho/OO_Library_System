@@ -104,6 +104,9 @@ void Interface::menu(){
 			case 8:
 				excluir_periodico();
 				break;
+			case 9:
+				excluir_emprestimo();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -310,6 +313,30 @@ void Interface::excluir_usuario(){
 		biblio.exclui_usuario(lista_usuarios[indice_do_usuario]);
 		//cout << "Usuario " << lista_usuarios[indice_do_usuario].get_nome() << " excluido com sucesso" << endl;
 	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
+void Interface::excluir_emprestimo(){
+	vector<Emprestimo> lista_emprestimos = biblio.get_lista_emprestimos();
+	int numero, indice_do_emprestimo;
+	cout << "Numero do emprestimo: ";
+	numero = le_inteiro();
+	bool existe;
+	for(int i=0; i<lista_emprestimos.size(); i++){
+		if (lista_emprestimos[i].get_numero() == numero){
+			cout << "Emprestimo " << lista_emprestimos[i].get_numero() << " encontrado !" << endl;
+			indice_do_emprestimo = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Emprestimo nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	biblio.exclui_emprestimo(lista_emprestimos[indice_do_emprestimo]);
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
