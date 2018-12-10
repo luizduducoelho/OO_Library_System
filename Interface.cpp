@@ -11,18 +11,6 @@ Interface::Interface(){
 
 using namespace std;
 
-/*int Interface::le_inteiro(){
-	int x;
-	cin >> x;
-	while(cin.fail()) {
-        cout << "ERRO. Digite um inteiro: " ;
-        cin.clear();
-        cin.ignore(256,'\n');
-        cin >> x;
-    }
-    return x;
-}*/
-
 int Interface::le_inteiro(){
 	int x;
 	string user_input;
@@ -118,6 +106,9 @@ void Interface::menu(){
 				break;
 			case 13:
 				pesquisa_publicacao_por_titulo();
+				break;
+			case 14:
+				pesquisa_livro_por_autor();
 				break;
 			case 15:
 				lista_usuarios();
@@ -473,7 +464,7 @@ void Interface::pesquisa_publicacao_por_titulo(){
 	vector<Publicacao*> publicacoes_encontradas;
 	string parte_do_titulo;
 	cout << "Pesquisando por titulo" << endl;
-	cout << "Digite parte do nome do titulo ";
+	cout << "Digite parte do nome do titulo: ";
 	std::getline(cin, parte_do_titulo);
 	cout << endl;
 	publicacoes_encontradas = biblio.pesquisa_publicacao(parte_do_titulo);
@@ -499,6 +490,33 @@ void Interface::pesquisa_publicacao_por_titulo(){
 			std::cout << "Mes: " << new_pointer->get_mes() << std::endl;
 		}
 		std::cout << std::endl;
+	}
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
+void Interface::pesquisa_livro_por_autor(){
+	vector<Livro> livros_encontrados;
+	string parte_do_autor;
+	cout << "Pesquisando por autor" << endl;
+	cout << "Digite parte do nome do autor do livro: ";
+	std::getline(cin, parte_do_autor);
+	cout << endl;
+	livros_encontrados = biblio.pesquisa_por_autor(parte_do_autor);
+	if (livros_encontrados.size() == 0){
+		cout << "Nenhum livro encontrado" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get() ;
+		return;
+	}
+	for (int i=0; i < livros_encontrados.size(); i++){
+		cout << "Codigo da Publicacao: " << livros_encontrados[i].get_codPub() << endl;
+		cout << "Ano: " << livros_encontrados[i].get_ano() << endl;
+		cout << "Titulo: " << livros_encontrados[i].get_titulo() << endl;
+		cout << "Editora: " << livros_encontrados[i].get_editora() << endl;
+		cout << "Autores: " << livros_encontrados[i].get_autores() << endl;
+		cout << "Quantidade: " << livros_encontrados[i].get_quantidade() << endl;
+		cout << endl;
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
