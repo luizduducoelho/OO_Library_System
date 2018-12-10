@@ -523,16 +523,25 @@ void Interface::pesquisa_livro_por_autor(){
 }
 
 void Interface::lista_publicacoes(){
-	/*cout << "Temos " << biblio.get_publicacoes_size() << " Publicacoes" << endl;
-	for (int i=0; i < biblio.get_publicacoes_size(); i++){
-		cout << "Iteration " << i << endl;
-		cout << "Codigo da Publicacao: " << biblio.get_codPub(i) << endl;
-		cout << "Ano: " << biblio.get_ano(i) << endl;
-		cout << "Titulo: " << biblio.get_titulo(i) << endl;
-		cout << "Editora: " << biblio.get_editora(i) << endl;
-		cout << endl;
-	}*/
-	biblio.imprime_publicacoes();
+	vector<Publicacoes*> lista_publicacoes = biblio.get_lista_publicacoes();
+	for (int i=0; i < lista_publicacoes.size(); i++){
+		std::cout << "Codigo da Publicacao: " << lista_publicacoes[i]->get_codPub() << std::endl;
+		std::cout << "Ano: " << lista_publicacoes[i]->get_ano() << std::endl;
+		std::cout << "Titulo: " << lista_publicacoes[i]->get_titulo() << std::endl;
+		std::cout << "Editora: " << lista_publicacoes[i]->get_editora() << std::endl;
+		if(dynamic_cast<Livro*>(lista_publicacoes[i])){
+			Livro* new_pointer = dynamic_cast<Livro*>(lista_publicacoes[i]);
+			std::cout << "Autores: " << new_pointer->get_autores() << std::endl;
+			std::cout << "Quantidade: " << new_pointer->get_quantidade() << std::endl;
+		}
+		else if(dynamic_cast<Periodico*>(lista_publicacoes[i])){
+			Periodico* new_pointer = dynamic_cast<Periodico*>(lista_publicacoes[i]);
+			std::cout << "Numero edicao: " << new_pointer->get_numEdicao() << std::endl;
+			std::cout << "Mes: " << new_pointer->get_mes() << std::endl;
+		}
+		std::cout << std::endl;
+	}
+	//biblio.imprime_publicacoes();
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
