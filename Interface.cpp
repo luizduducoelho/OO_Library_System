@@ -116,6 +116,9 @@ void Interface::menu(){
 			case 12:
 				devolve_livro();
 				break;
+			case 13:
+				pesquisa_publicacao_por_titulo();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -462,6 +465,41 @@ void Interface::devolve_livro(){
 	//ItemEmprestimo item(livro_obj);
 	biblio.devolve_item(lista_emprestimos[indice_do_emprestimo], livro_obj);
 	cout << "Item " << livro_obj.get_titulo() << " devolvido! " << endl;
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
+void Interface::pesquisa_publicacao_por_titulo(){
+	vector<Publicacao*> publicacoes_encontradas;
+	string parte_do_titulo;
+	cout << "Pesquisando por titulo" << endl;
+	cout << "Digite parte do nome do titulo ";
+	std::getline(cin, parte_do_titulo);
+	cout << endl;
+	publicacoes_encontradas = biblio.pesquisa_publicacao(parte_do_titulo);
+	if (publicacoes_encontradas.size() == 0){
+		cout << "Nenhuma publicacao encontrada" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get() ;
+		return;
+	}
+	for (int i=0; i < publicacoes_encontradas.size(); i++){
+		std::cout << "Codigo da Publicacao: " << publicacoes_encontradas[i]->get_codPub() << std::endl;
+		std::cout << "Ano: " << publicacoes_encontradas[i]->get_ano() << std::endl;
+		std::cout << "Titulo: " << publicacoes_encontradas[i]->get_titulo() << std::endl;
+		std::cout << "Editora: " << publicacoes_encontradas[i]->get_editora() << std::endl;
+		if(dynamic_cast<Livro*>(publicacoes_encontradas[i])){
+			Livro* new_pointer = dynamic_cast<Livro*>(publicacoes_encontradas[i]);
+			std::cout << "Autores: " << new_pointer->get_autores() << std::endl;
+			std::cout << "Quantidade: " << new_pointer->get_quantidade() << std::endl;
+		}
+		else if(dynamic_cast<Periodico*>(publicacoes_encontradas[i])){
+			Periodico* new_pointer = dynamic_cast<Periodico*>(publicacoes_encontradas[i]);
+			std::cout << "Numero edicao: " << new_pointer->get_numEdicao() << std::endl;
+			std::cout << "Mes: " << new_pointer->get_mes() << std::endl;
+		}
+		std::cout << std::endl;
+	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }

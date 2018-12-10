@@ -139,11 +139,11 @@ void Biblioteca::imprime_publicacoes(){
 	}
 }
 
-vector<Publicacao> Biblioteca::pesquisa_publicacao(std::string parte_do_titulo){
-	vector<Publicacao> p_aux;
+vector<Publicacao*> Biblioteca::pesquisa_publicacao(std::string parte_do_titulo){
+	vector<Publicacao*> p_aux;
 	for(int i = 0; i < lista_publicacoes.size(); i++){
 		if(lista_publicacoes[i]->compare_titulo(parte_do_titulo) > 4)
-			p_aux.push_back(*lista_publicacoes[i]);
+			p_aux.push_back(lista_publicacoes[i]);
 	}
 	return p_aux;
 }
