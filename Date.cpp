@@ -27,7 +27,7 @@ void Date::adiciona_dias(int d){
 }
 
 void Date::reset_date(){
-	long long int  ptr = NULL;
+	long long int  ptr = (long long int)NULL;
 	date_stored = ptr;
 }
 
