@@ -10,11 +10,8 @@
 
 using namespace std;
 
-//int Emprestimo::proximoNumero = 0;
-
 int main(){
-	
-	/////////// Interface
+
 	cout << endl;
 	Interface interface;
 	interface.menu();

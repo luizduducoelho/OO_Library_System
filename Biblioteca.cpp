@@ -1,4 +1,5 @@
 #include "Biblioteca.h"
+#include "Erro.h"
 
 int Emprestimo::proximoNumero = 0;
 
@@ -10,18 +11,16 @@ void Biblioteca::insere_usuario(Usuario user){
 }
 
 void Biblioteca::insere_publicacao(Publicacao &publi){
-	//lista_publicacoes.push_back(&publi);
 	if(dynamic_cast<Livro*>(&publi)){
 		Livro* new_pointer = dynamic_cast<Livro*>(&publi);
 		lista_publicacoes.push_back(new Livro(new_pointer->get_codPub(), new_pointer->get_ano(), new_pointer->get_titulo(), new_pointer->get_editora(),new_pointer->get_autores(), new_pointer->get_quantidade()));
-		//lista_publicacoes.push_back(new Livro(dynamic_cast<Livro*>(&publi));
 	}
 	else if(dynamic_cast<Periodico*>(&publi)){
 		Periodico* new_pointer = dynamic_cast<Periodico*>(&publi);
 		lista_publicacoes.push_back(new Periodico(new_pointer->get_codPub(), new_pointer->get_ano(), new_pointer->get_titulo(), new_pointer->get_editora(), new_pointer->get_numEdicao(), new_pointer->get_mes()));
 	}
 	else{
-		std::cout << "Erro. Tipo desonhecido" << endl;
+		throw Erro("Erro nao identificado!");
 	}
 }
 
@@ -40,7 +39,7 @@ void Biblioteca::insere_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp)
 void Biblioteca::exclui_usuario(Usuario user){
 	for(int i = 0; i < lista_emprestimos.size(); i++){
 		if(lista_emprestimos[i].get_user() == user)
-			return; // THROW!!! Usuario com emprestimo
+			throw Erro("Usuario possui emprestimo! Nao eh possivel excluir");
 	}
 	for(int j = 0; j < lista_usuarios.size(); j++){
 		if(lista_usuarios[j] == user){
@@ -54,12 +53,12 @@ void Biblioteca::exclui_usuario(Usuario user){
 void Biblioteca::exclui_publicacao(Publicacao &publi){
 	for(int i = 0; i < lista_publicacoes.size(); i++){
 		if(lista_publicacoes[i]->get_codPub() == publi.get_codPub()){
-			if (dynamic_cast<Livro*>(lista_publicacoes[i])){  // Se eh livro
+			if (dynamic_cast<Livro*>(lista_publicacoes[i])){
 				for(int j = 0; j < lista_emprestimos.size(); j++){
 					vector<ItemEmprestimo> itens = lista_emprestimos[j].get_itens();
 					for(int k = 0; k < lista_emprestimos[j].get_sizeitens(); k++){
 						if (itens[k].get_cod() == publi.get_codPub()){
-							return;
+							throw Erro("A publicacao eh um Livro e possui emprestimo! Nao eh possivel excluir");
 						}
 					}
 				}
@@ -67,12 +66,12 @@ void Biblioteca::exclui_publicacao(Publicacao &publi){
 			lista_publicacoes.erase(lista_publicacoes.begin() + i);
 			return;
 		}
-	}	
+	}throw Erro("A publicacao eh um Periodico! Nao eh possivel excluir");
 }
 
 void Biblioteca::exclui_emprestimo(Emprestimo emp){
 	if(emp.get_sizeitens() != 0)
-		return; // !!! LAN�AR THROW, tem itens no empr�stimo
+		throw Erro("Ha itens no Emprestimo! Nao eh possivel excluir o Emprestimo antes da devolucao.");
 	else{
 		for(int i = 0; i < lista_emprestimos.size(); i++){
 			if(lista_emprestimos[i] == emp){
@@ -88,11 +87,6 @@ void Biblioteca::exclui_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp)
 		if(lista_emprestimos[i] == emp){
 			for(int j = 0; j < lista_emprestimos[i].get_sizeitens(); j++){
 				if(item_emp == lista_emprestimos[i].get_item(j)){	
-					
-					//Livro l = item_emp.get_Livro();
-					//lista_emprestimos[i].exclui_livro(l);
-					//return;
-					
 					lista_emprestimos[i].get_itens().erase(lista_emprestimos[i].get_itens().begin() + j);
 				}
 			}
@@ -144,9 +138,7 @@ vector<Publicacao*> Biblioteca::pesquisa_publicacao(std::string parte_do_titulo)
 	size_t found;
 	for(int i = 0; i < lista_publicacoes.size(); i++){
 		found = lista_publicacoes[i]->get_titulo().find(parte_do_titulo);
-		//cout << found << endl;
 		if (found != string::npos){
-			//cout << lista_publicacoes[i]->compare_titulo(found, parte_do_titulo.length(), parte_do_titulo) << endl;
 			if(lista_publicacoes[i]->compare_titulo(found, parte_do_titulo.length(), parte_do_titulo) == 0)
 				p_aux.push_back(lista_publicacoes[i]);
 		}
@@ -161,16 +153,13 @@ vector<Livro> Biblioteca::pesquisa_por_autor(std::string parte_do_autor){
 		if (dynamic_cast<Livro*>(&(*lista_publicacoes[i]))){
 			Livro* livro = dynamic_cast<Livro*>(&(*lista_publicacoes[i]));
 			found = livro->get_autores().find(parte_do_autor);
-			//cout << found << endl;
 			if (found != string::npos){
-				//cout << lista_publicacoes[i]->compare_autores(found, parte_do_autor.length(), parte_do_autor) << endl;
 				if(livro->compare_autores(found, parte_do_autor.length(), parte_do_autor) == 0 || livro->compare_autores(found, parte_do_autor.length(), parte_do_autor) > 3){
-				Livro &l = (Livro&)(*lista_publicacoes[i]);
-				l_aux.push_back(l);
+					Livro &l = (Livro&)(*lista_publicacoes[i]);
+					l_aux.push_back(l);
 				}
 			}
 		}
-	
 	}
 	return l_aux;
 }				

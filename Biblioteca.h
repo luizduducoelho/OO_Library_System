@@ -22,7 +22,7 @@ class Biblioteca{
 	public:
 		Biblioteca();
 		void insere_usuario(Usuario user);
-		void insere_publicacao(Publicacao &publi);  // {lista_publicacoes.push_back(&publi);}
+		void insere_publicacao(Publicacao &publi);
 		void insere_emprestimo(Emprestimo emp);
 		void insere_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp);
 		void exclui_usuario(Usuario user);

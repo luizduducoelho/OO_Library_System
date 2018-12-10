@@ -19,7 +19,6 @@ class Usuario
 		bool operator==(Usuario user);
 		void recebe_penalizacao(Date data_prevista) {dataPenalizacao.calcula_data_penalizacao(data_prevista);}
 		bool verifica_penalizacao() {return dataPenalizacao.verifica_penalizacao();}
-		//~Usuario();
 };
 
 #endif

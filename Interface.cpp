@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include "Erro.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -166,7 +167,11 @@ void Interface::cadastra_novo_livro(){
 	qt = le_inteiro();
 	
 	Livro livro(codPub, ano, titulo, editora, autor, qt);
-	biblio.insere_publicacao(livro);
+	try{
+		biblio.insere_publicacao(livro);
+	}catch(Erro &e){
+		cout << e.get_erro() << endl;
+	}	
 	
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
@@ -191,7 +196,11 @@ void Interface::cadastra_novo_periodico(){
 	numero_edicao = le_inteiro();
 	
 	Periodico period(codPub, ano, titulo, editora, numero_edicao, mes);
-	biblio.insere_publicacao(period);
+	try{
+		biblio.insere_publicacao(period);
+	}catch(Erro &e){
+		cout << e.get_erro() << endl;
+	}
 }
 
 void Interface::cadastra_novo_emprestimo(){
@@ -268,7 +277,11 @@ void Interface::inserir_novo_item_emprestimo(){
 		Livro * livro = dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro]);
 		Livro livro_obj = *livro;
 		ItemEmprestimo item(livro_obj);
-		biblio.insere_item_emprestimo(lista_emprestimos[indice_do_emprestimo], item);
+		try{
+			biblio.insere_item_emprestimo(lista_emprestimos[indice_do_emprestimo], item);
+		}catch(Erro &e){
+			cout << e.get_erro() << endl;
+		}
 		cout << "Item " << livro_obj.get_titulo() << " inserido! " << endl;
 	}
 	else{
@@ -290,7 +303,6 @@ void Interface::lista_usuarios(){
 		cout << endl;
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
-	//cin.ignore();
 	cin.get() ;
 }
 
@@ -313,8 +325,11 @@ void Interface::excluir_usuario(){
 		cout << "CPF nao existe, tente novamente!" << endl;
 	}
 	else{
-		biblio.exclui_usuario(lista_usuarios[indice_do_usuario]);
-		//cout << "Usuario " << lista_usuarios[indice_do_usuario].get_nome() << " excluido com sucesso" << endl;
+		try{
+			biblio.exclui_usuario(lista_usuarios[indice_do_usuario]);
+		}catch(Erro &e){
+			cout << e.get_erro() << endl;
+		}
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
@@ -339,7 +354,11 @@ void Interface::excluir_emprestimo(){
 		cin.get();
 		return;
 	}
-	biblio.exclui_emprestimo(lista_emprestimos[indice_do_emprestimo]);
+	try{
+		biblio.exclui_emprestimo(lista_emprestimos[indice_do_emprestimo]);
+	}catch(Erro &e){
+		cout << e.get_erro() << endl;
+	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }
@@ -453,7 +472,6 @@ void Interface::devolve_livro(){
 	}
 	Livro * livro = dynamic_cast<Livro*>(lista_publicacoes[indice_do_livro]);
 	Livro livro_obj = *livro;
-	//ItemEmprestimo item(livro_obj);
 	biblio.devolve_item(lista_emprestimos[indice_do_emprestimo], livro_obj);
 	cout << "Item " << livro_obj.get_titulo() << " devolvido! " << endl;
 	cout << "Aperte enter para retornar ao menu ..." << endl;
@@ -541,7 +559,6 @@ void Interface::lista_publicacoes(){
 		}
 		std::cout << std::endl;
 	}
-	//biblio.imprime_publicacoes();
 	cout << "Aperte enter para retornar ao menu ..." << endl;
 	cin.get() ;
 }

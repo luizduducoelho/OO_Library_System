@@ -52,8 +52,7 @@ bool Date::verifica_penalizacao(){
 	time_t now = time(0);
 	double seconds;
 	seconds = difftime(date_stored, now);
-	if (seconds > 0){
-		// Esta penalizado
+	if (seconds > 0){	// Esta penalizado
 		return false;
 	}
 	else{

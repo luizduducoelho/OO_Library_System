@@ -16,6 +16,7 @@ class ItemEmprestimo
 		std::string get_date() const {return dataDevolucao.get_date();}
 		void date_sistema();
 		bool operator==(ItemEmprestimo IE);
+		void decrementa_livro() {l.decrementa();}
 };
 
 #endif

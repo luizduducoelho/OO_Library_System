@@ -1,14 +1,6 @@
 #include "Emprestimo.h"
+#include "Erro.h"
 #include <iostream>
-
-void Emprestimo::adiciona_livro(Livro &novo_livro){
-	if (novo_livro.get_quantidade() <= 0){
-		std::cout << "Livro esgotado" << std::endl;
-	}
-	else{
-		novo_livro.decrementa();
-	}
-}
 
 void Emprestimo::exclui_livro(Livro &livro_excluido){
 	livro_excluido.incrementa();
@@ -16,12 +8,11 @@ void Emprestimo::exclui_livro(Livro &livro_excluido){
 
 void Emprestimo::adiciona_itememprestimo(ItemEmprestimo item){
 	if (usuario.verifica_penalizacao()){
-		item.get_Livro().decrementa();
+		item.decrementa_livro();
 		itens.push_back(item);
 	}
 	else{
-		// THROWWWWW
-		return;
+		throw Erro("Usuario esta penalizado, nao pode fazer emprestimo!");
 	}
 }
 
