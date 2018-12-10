@@ -14,7 +14,7 @@ class ItemEmprestimo
 		string get_titulo() const {return l.get_titulo();}
 		Livro get_Livro() const {return l;}
 		void date_sistema();
-//		ItemEmprestimo &get_item() {return (*this);}
+		bool operator==(ItemEmprestimo IE);
 };
 
 #endif

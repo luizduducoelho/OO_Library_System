@@ -83,25 +83,26 @@ void Biblioteca::exclui_emprestimo(Emprestimo emp){
 	}
 }
 
-/*
 void Biblioteca::exclui_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp){
 	for(int i = 0; i < lista_emprestimos.size(); i++){
 		if(lista_emprestimos[i] == emp){
 			for(int j = 0; j < lista_emprestimos[i].get_sizeitens(); j++){
-				if(item_emp.get_Livro() == lista_emprestimos[i].get_codPub(j)){	
-					Livro l = item_emp.get_Livro();
-					lista_emprestimos[i].exclui_livro(l);
-					return;
+				if(item_emp == lista_emprestimos[i].get_item(j)){	
+					
+					//Livro l = item_emp.get_Livro();
+					//lista_emprestimos[i].exclui_livro(l);
+					//return;
+					
+					lista_emprestimos[i].get_itens().erase(lista_emprestimos[i].get_itens().begin() + j);
 				}
 			}
 		}
 	}
-}*/
+}
 
-/*
 void Biblioteca::devolve_item(Emprestimo emp, Livro livro){
 	for(int i = 0; i < lista_emprestimos.size(); i++){
-		if(lista_emprestimos[i].get_numero() == emp.get_numero()){
+		if(lista_emprestimos[i] == emp){
 			for(int j = 0; j < lista_emprestimos[i].get_sizeitens(); j++){
 				if(livro.get_codPub() == lista_emprestimos[i].get_codPub(j)){
 					lista_emprestimos[i].devolve_livro(livro);
@@ -109,7 +110,14 @@ void Biblioteca::devolve_item(Emprestimo emp, Livro livro){
 			}
 		}
 	}
-}*/
+}
+
+void Biblioteca::devolve_todos(Emprestimo emp){
+	for(int i = 0; i < lista_emprestimos.size(); i++){
+		if(lista_emprestimos[i] == emp)
+			lista_emprestimos[i].devolve_todos();			
+	}
+}
 
 void Biblioteca::imprime_publicacoes(){
 	for (int i=0; i < lista_publicacoes.size(); i++){

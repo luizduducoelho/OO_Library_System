@@ -30,7 +30,7 @@ class Biblioteca{
 		void exclui_emprestimo(Emprestimo emp);
 		void exclui_item_emprestimo(Emprestimo emp, ItemEmprestimo item_emp);
 		void devolve_item(Emprestimo emp, Livro livro);
-		void devolde_todos(Emprestimo emp);
+		void devolve_todos(Emprestimo emp);
 		vector<Publicacao> pesquisa_publicacao(std::string parte_do_titulo);
 		vector<Livro> pesquisa_por_autor(std::string parte_do_autor);
 		vector<Usuario> get_lista_usuarios() const {return lista_usuarios;}

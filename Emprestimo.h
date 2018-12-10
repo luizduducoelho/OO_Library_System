@@ -25,10 +25,10 @@ class Emprestimo
 		void devolve_livro(Livro &livro_devolvido);
 		void devolve_todos();
 		int get_sizeitens() const {return itens.size();}
-		vector<ItemEmprestimo> get_itens() const {return itens;}
+		vector<ItemEmprestimo> &get_itens() {return itens;}
 		
 		bool operator==(Emprestimo p);
-//		ItemEmprestimo operator[](int i) {return itens[i].get_item();}
+		ItemEmprestimo get_item(int i) {return itens[i];}
 		
 		int get_codPub(int i) {return itens[i].get_cod();}
 		
