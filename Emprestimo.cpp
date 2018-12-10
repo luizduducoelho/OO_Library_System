@@ -27,6 +27,7 @@ void Emprestimo::devolve_livro(Livro &livro_devolvido){
 			return;
 		}
 	}
+	
 }
 
 void Emprestimo::devolve_todos(){

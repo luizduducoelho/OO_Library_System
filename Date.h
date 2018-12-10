@@ -16,6 +16,7 @@ class Date
 		void set_date(Date data_sistema){date_stored = data_sistema.date_stored;}
 		void reset_date();
 		bool operator==(Date d);
+		void calcula_data_penalizacao(Date data_prevista);
 };
 
 #endif

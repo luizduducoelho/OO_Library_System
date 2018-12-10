@@ -21,7 +21,10 @@ bool Livro::operator==(Livro l){
 		return false;
 }
 
-int Livro::compare_autores(string aut){
-	return autores.compare(aut);
-}
+//int Livro::compare_autores(string aut){
+//	return autores.compare(aut);
+//}
 
+int Livro::compare_autores(size_t pos, size_t len, string aut){
+	return autores.compare(pos, len, aut);
+}

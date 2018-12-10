@@ -12,7 +12,7 @@ Date::Date(time_t some_date){
 }
 
 std::string Date::get_date() const {
-	if (date_stored == NULL){
+	if (date_stored == (long long int)NULL){
 		return "";
 	}
 	std::string timestamp(ctime(&date_stored));
@@ -36,4 +36,10 @@ bool Date::operator==(Date t){
 		return true;
 	else
 		return false;
+}
+
+void Date::calcula_data_penalizacao(Date data_prevista){
+	double seconds;
+	seconds = difftime(date_stored, data_prevista.date_stored);
+	
 }

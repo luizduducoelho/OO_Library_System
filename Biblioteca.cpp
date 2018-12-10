@@ -164,7 +164,7 @@ vector<Livro> Biblioteca::pesquisa_por_autor(std::string parte_do_autor){
 			//cout << found << endl;
 			if (found != string::npos){
 				//cout << lista_publicacoes[i]->compare_autores(found, parte_do_autor.length(), parte_do_autor) << endl;
-				if(lista_publicacoes[i]->compare_autores(found, parte_do_autor.length(), parte_do_autor) == 0 || lista_publicacoes[i]->compare_autores(found, parte_do_autor.length(), parte_do_autor) > 3){
+				if(livro->compare_autores(found, parte_do_autor.length(), parte_do_autor) == 0 || livro->compare_autores(found, parte_do_autor.length(), parte_do_autor) > 3){
 				Livro &l = (Livro&)(*lista_publicacoes[i]);
 				l_aux.push_back(l);
 				}
