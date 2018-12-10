@@ -2,7 +2,7 @@
 
 void ItemEmprestimo::date_sistema(){
 	Date data_sistema;
-	dataDevolucao.set_date(data_sistema.get_date());
+	dataDevolucao.set_date(data_sistema);
 }
 
 bool ItemEmprestimo::operator==(ItemEmprestimo IE){

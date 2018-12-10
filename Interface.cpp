@@ -110,6 +110,9 @@ void Interface::menu(){
 			case 10:
 				excluir_item_emprestimo();
 				break;
+			case 11:
+				devolve_todos();
+				break;
 			case 15:
 				lista_usuarios();
 				break;
@@ -390,6 +393,30 @@ void Interface::excluir_item_emprestimo(){
 	cin.get() ;
 }
 
+void Interface::devolve_todos(){
+	vector<Emprestimo> lista_emprestimos = biblio.get_lista_emprestimos();
+	int numero, indice_do_emprestimo;
+	cout << "Numero do emprestimo: ";
+	numero = le_inteiro();
+	bool existe;
+	for(int i=0; i<lista_emprestimos.size(); i++){
+		if (lista_emprestimos[i].get_numero() == numero){
+			cout << "Emprestimo " << lista_emprestimos[i].get_numero() << " encontrado !" << endl;
+			indice_do_emprestimo = i;
+			existe = true;
+		}
+	}
+	if (!existe){
+		cout << "Emprestimo nao existe, tente novamente!" << endl;
+		cout << "Aperte enter para retornar ao menu ..." << endl;
+		cin.get();
+		return;
+	}
+	biblio.devolve_todos(lista_emprestimos[indice_do_emprestimo]);
+	cout << "Aperte enter para retornar ao menu ..." << endl;
+	cin.get() ;
+}
+
 void Interface::lista_publicacoes(){
 	/*cout << "Temos " << biblio.get_publicacoes_size() << " Publicacoes" << endl;
 	for (int i=0; i < biblio.get_publicacoes_size(); i++){
@@ -414,9 +441,15 @@ void Interface::lista_emprestimos(){
 		vector<ItemEmprestimo> vetor_de_itens = lista_de_emprestimos[i].get_itens();
 		cout << "Emprestimo tem " << vetor_de_itens.size() << " livros" << endl;
 		for (int j=0; j < vetor_de_itens.size(); j++){
-			cout << "Item " << vetor_de_itens[j].get_titulo() << endl;
+			cout << "Item " << vetor_de_itens[j].get_titulo();
+			if (vetor_de_itens[j].get_date() != ""){
+				cout << " devolvido em " << vetor_de_itens[j].get_date();
+			}
+			else{
+				cout << endl;
+			}
 		}
-		cout << "Data de devolucao: " << lista_de_emprestimos[i].get_data_devolucao() << endl;
+		cout << "Data prevista de devolucao: " << lista_de_emprestimos[i].get_data_devolucao() << endl;
 		cout << endl;
 	}
 	cout << "Aperte enter para retornar ao menu ..." << endl;

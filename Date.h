@@ -13,7 +13,8 @@ class Date
 		Date(time_t some_date);
 		std::string get_date() const;
 		void adiciona_dias(int d);
-		void set_date(std::string time){std::string time_string = time;}
+		void set_date(Date data_sistema){date_stored = data_sistema.date_stored;}
+		void reset_date();
 		bool operator==(Date d);
 };
 

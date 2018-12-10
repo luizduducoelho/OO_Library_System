@@ -12,6 +12,9 @@ Date::Date(time_t some_date){
 }
 
 std::string Date::get_date() const {
+	if (date_stored == NULL){
+		return "";
+	}
 	std::string timestamp(ctime(&date_stored));
 	return timestamp;
 }
@@ -21,6 +24,11 @@ void Date::adiciona_dias(int d){
 	timeinfo_struct = localtime(&date_stored);   // Convert time to struct
 	timeinfo_struct->tm_mday += d;
 	date_stored = mktime (timeinfo_struct);		 // Convert struct back to time
+}
+
+void Date::reset_date(){
+	long long int  ptr = NULL;
+	date_stored = ptr;
 }
 
 bool Date::operator==(Date t){
