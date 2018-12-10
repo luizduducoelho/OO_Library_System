@@ -12,8 +12,9 @@ class Date
 		Date();
 		Date(time_t some_date);
 		std::string get_date() const;
+		struct tm * get_structtm() const;
 		void adiciona_dias(int d);
-		void set_date(std::string time){std::string time_string = time;}
+		void set_date(std::string time);
 		bool operator==(Date d);
 };
 

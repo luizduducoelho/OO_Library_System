@@ -16,6 +16,9 @@ class Usuario
 		std::string get_cpf() const {return cpf;}
 		std::string get_endereco() const {return endereco;}
 		std::string get_fone() const {return fone;}
+		std::string get_data_penalizacao() const {return dataPenalizacao.get_date();}
+		struct tm * get_structtm() const {return dataPenalizacao.get_structtm();}
+		void set_date_string(std::string time_string) {dataPenalizacao.set_date(time_string);}
 		bool operator==(Usuario user);
 		//~Usuario();
 };

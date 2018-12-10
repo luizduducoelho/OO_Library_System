@@ -154,4 +154,65 @@ vector<Publicacao> Biblioteca::pesquisa_publicacao(std::string parte_do_titulo){
 	return l_aux;
 }				
 
+void Biblioteca::gravar_em_arquivo(){
+	ofstream myfile;
+	myfile.open("lista_usuarios.txt");
+	for (int i=0; i<lista_usuarios.size(); i++){
+		myfile << lista_usuarios[i].get_nome() << "\n";
+		myfile << lista_usuarios[i].get_cpf() << "\n";
+		myfile << lista_usuarios[i].get_endereco() << "\n";
+		myfile << lista_usuarios[i].get_fone() << "\n";
+		//myfile << lista_usuarios[i].get_data_penalizacao();
+		struct tm * timeinfo_struct = lista_usuarios[i].get_structtm();
+		myfile << timeinfo_struct->tm_sec << " ";
+		myfile << timeinfo_struct->tm_min << " ";
+		myfile << timeinfo_struct->tm_hour << " ";
+		myfile << timeinfo_struct->tm_mday << " ";
+		myfile << timeinfo_struct->tm_mon << " ";
+		myfile << timeinfo_struct->tm_year << " ";
+		myfile << timeinfo_struct->tm_wday << " ";
+		myfile << timeinfo_struct->tm_yday << " ";
+		myfile << timeinfo_struct->tm_isdst << "\n";
+	}
+	myfile << "END";
+	myfile.close();
+	
+	myfile.open ("lista_emprestimos.txt");
+	for (int i=0; i<lista_emprestimos.size(); i++){
+		myfile << lista_emprestimos[i].get_cpfuser() << "\n";
+		myfile << lista_emprestimos[i].get_data_emprestimo() ;
+		myfile << lista_emprestimos[i].get_data_devolucao();
+		vector<ItemEmprestimo> vetor_de_itens = lista_emprestimos[i].get_itens();
+		for (int j=0; j<vetor_de_itens.size(); j++){
+			myfile << vetor_de_itens[j].get_cod() << "\n";
+		}
+		myfile << "\n";
+	}
+	myfile.close();
+}
 
+void Biblioteca::ler_do_arquivo(){
+	ifstream inFile;
+	inFile.open("lista_usuarios.txt");
+	if (!inFile) {
+	    cerr << "Unable to open file datafile txt";
+	    exit(1);   // call system to stop
+	}
+	string n, c, e, f, date;
+	while(!inFile.eof()){
+		getline(inFile, n);
+		cout << n << endl;
+		if (n == "\n" || n=="" || n=="END"){
+			break;
+		}
+		getline(inFile, c);
+		getline(inFile, e);
+		getline(inFile, f);
+		getline(inFile, date);
+		Usuario usuario(n, c, e, f);
+		cout << "Before" << endl;
+		usuario.set_date_string(date);
+		insere_usuario(usuario);
+	}
+	inFile.close();
+}

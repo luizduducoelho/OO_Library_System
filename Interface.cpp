@@ -62,6 +62,7 @@ void Interface::menu(){
 	menu_messages.push_back(std::string("Listar todos os emprestimos"));
 	menu_messages.push_back(std::string("Sair do programa"));
 	
+	biblio.ler_do_arquivo();
 	bool continue_program = true;
 	while(continue_program){
 		// Exibe menu
@@ -115,6 +116,7 @@ void Interface::menu(){
 				break;
 			case 18:
 				std::cout << "Fim do programa" << std::endl;
+				biblio.gravar_em_arquivo();
 				continue_program = false;
 				break;
 			default:

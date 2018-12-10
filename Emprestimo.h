@@ -37,6 +37,7 @@ class Emprestimo
 		std::string get_cpfuser() const {return usuario.get_cpf();}
 		std::string get_nome_usuario() const {return usuario.get_nome();}
 		std::string get_data_devolucao() const {return dataPrevDevolucao.get_date();} 
+		std::string get_data_emprestimo() const {return dataEmprestimo.get_date();}
 };
 
 #endif
