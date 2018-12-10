@@ -15,6 +15,7 @@ void Emprestimo::exclui_livro(Livro &livro_excluido){
 }
 
 void Emprestimo::adiciona_itememprestimo(ItemEmprestimo item){
+	item.get_Livro().decrementa();
 	itens.push_back(item);
 }
 
