@@ -20,7 +20,6 @@ class Emprestimo
 		Emprestimo(Usuario user, Date devolucao): numero(++proximoNumero), usuario(user), dataPrevDevolucao(devolucao) {};
 		int get_numero() const {return numero;}
 		void adiciona_itememprestimo(ItemEmprestimo item);
-		void adiciona_livro(Livro &novo_livro);
 		void exclui_livro(Livro &livro_excluido);
 		void devolve_livro(Livro &livro_devolvido);
 		void devolve_todos();

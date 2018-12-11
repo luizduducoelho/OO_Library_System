@@ -66,7 +66,7 @@ void Biblioteca::exclui_publicacao(Publicacao &publi){
 			lista_publicacoes.erase(lista_publicacoes.begin() + i);
 			return;
 		}
-	}throw Erro("A publicacao eh um Periodico! Nao eh possivel excluir");
+	}
 }
 
 void Biblioteca::exclui_emprestimo(Emprestimo emp){
